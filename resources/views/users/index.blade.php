@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <a href="{{route('users.create')}}">Nuevo</a>
-                    <div class="bg-white rounded-lg shadow-sm p-4 text-center flex flex-col gap-5">
+                    <div class="bg-white rounded-lg shadow-sm p-2 text-center flex flex-col gap-5">
                         <h1>Tabla de usuarios</h1>
 
                         <table>
@@ -34,12 +34,18 @@
                                             @endforeach
                                         @endif
                                     </td>
-                                    <td>
+                                    <td class="inline-flex">
                                         <a href="{{ route('users.edit', $user->id) }}">Editar</a>
 
                                         {!! Form::open(['method'=>'DELETE', 'route'=>['users.destroy', $user->id]]) !!}
                                         {!! Form::submit('Borrar') !!}
                                         {!! Form::close() !!}
+
+                                        <form action="{{ route('changeUserStatus', $user->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <button type="submit">Cambiar estado</button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
