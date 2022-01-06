@@ -14,6 +14,13 @@ use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:see-user|create-user|edit-user|delete-user', ['only'=>['index']]);
+        $this->middleware('permission:create-user', ['only'=>['create','store']]);
+        $this->middleware('permission:edit-user', ['only'=>['edit','update']]);
+        $this->middleware('permission:delete-user',['only'=>['destroy']]);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -33,7 +40,7 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::pluck('name','name')->all();
-        return view('users.create', compact('roles'));
+        return view('users.create', ['roles'=> $roles]);
     }
 
     /**

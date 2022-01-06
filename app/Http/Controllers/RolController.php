@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
 
 //add
@@ -13,10 +14,11 @@ class RolController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:see-rol | create-rol | edit-rol | delete-rol', ['only'=>['index']]);
+        $this->middleware('permission:see-rol|create-rol|edit-rol|delete-rol', ['only'=>['index']]);
         $this->middleware('permission:create-rol', ['only'=>['create','store']]);
         $this->middleware('permission:edit-rol', ['only'=>['edit','update']]);
-        $this->middleware('permission:delete-rol', ['only'=>['destroy']]);
+        $this->middleware('permission:delete-rol',['only'=>['destroy']]);
+
     }
     /**
      * Display a listing of the resource.
@@ -25,7 +27,20 @@ class RolController extends Controller
      */
     public function index()
     {
-        $roles = Role::paginate(5);
+        if(request()->page){
+            $key = 'roles' . request()->page;
+        }else{
+            $key= 'roles';
+        }
+
+        if(Cache::has($key)){
+            $roles = Role::paginate(5);
+        }else{
+            $roles = Role::paginate(5);
+            Cache::put($key, $roles);
+        }
+
+
         return view('roles.index', compact('roles'));
     }
 

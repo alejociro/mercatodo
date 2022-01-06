@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ trans('Home') }}
         </h2>
     </x-slot>
 
@@ -11,7 +11,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     @if($errors->any())
                         <div class="alert alert-dark alert-dimissible fade show" role="alert">
-                            <strong>Revise los campos!</strong>
+                            <strong>{{trans('Check the fields')}}</strong>
                             @foreach($errors->all() as $error)
                                 <span class="badge badge-danger">{{$error}}</span>
                             @endforeach
@@ -24,30 +24,30 @@
                     <div>
                         <div >
                             <div>
-                                <label for="name">Nombre</label>
+                                <label for="name">{{trans('Name')}}</label>
                                 {!! Form::text('name', null , array('class'=>'form-control')) !!}
                             </div>
                         </div>
                         <div>
                             <div >
-                                <label for="email">E-mail</label>
+                                <label for="email">{{trans('Email')}}</label>
                                 {!! Form::text('email', null, array('class'=>'form-control')) !!}
                             </div>
                         </div>
                         <div>
                             <div>
-                                <label>Password</label>
+                                <label>{{trans('Password')}}</label>
                                 {!! Form::password('password', array('class' => 'form-control')) !!}
                             </div>
                         </div>
                         <div>
                             <div>
-                                <label for="">Roles</label>
+                                <label for="">{{trans('Roles')}}</label>
                                 {!! Form::select('roles[]', $roles,[], array('class'=>'form-control')) !!}
                             </div>
                         </div>
                         <div>
-                            <button>Guardar</button>
+                            <button>{{trans('Save')}}</button>
                         </div>
                     </div>
                         {!! Form::close() !!}
