@@ -27,7 +27,7 @@ class CheckUserStatus
 
             $request->session()->regenerateToken();
 
-            return redirect('disabled');
+            return redirect('login')->with('Error', 'Su cuenta esta deshabilitada');
         }
 
     }
