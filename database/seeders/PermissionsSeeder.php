@@ -18,7 +18,11 @@ class PermissionsSeeder extends Seeder
             'see-rol',
             'create-rol',
             'edit-rol',
-            'detele-rol'
+            'delete-rol',
+            'see-user',
+            'create-user',
+            'edit-user',
+            'delete-user'
         ];
         foreach ($permissions as $permission) {
             Permission::create(['name'=>$permission]);

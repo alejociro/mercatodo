@@ -13,10 +13,11 @@ class RolController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:see-rol | create-rol | edit-rol | delete-rol', ['only'=>['index']]);
+        $this->middleware('permission:see-rol|create-rol|edit-rol|delete-rol', ['only'=>['index']]);
         $this->middleware('permission:create-rol', ['only'=>['create','store']]);
         $this->middleware('permission:edit-rol', ['only'=>['edit','update']]);
-        $this->middleware('permission:delete-rol', ['only'=>['destroy']]);
+        $this->middleware('permission:delete-rol',['only'=>['destroy']]);
+
     }
     /**
      * Display a listing of the resource.
