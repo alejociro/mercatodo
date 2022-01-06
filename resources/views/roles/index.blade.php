@@ -23,15 +23,26 @@
                         @foreach($roles as $role)
                             <tr>
                                 <td>{{ $role->name }}</td>
-                                <td>
+                                <td class="inline-flex">
                                     @can('edit-rol')
-                                        <a href="{{ route('roles.edit', $role->id) }}">{{trans('Edit')}}</a>
+                                    <td class="inline-flex">
+                                        <div class="p-2">
+                                            <div class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">
+                                                <a href="{{ route('roles.edit', $role->id) }}">{{trans('Edit')}}</a>
+                                            </div>
+                                        </div>
+
                                     @endcan
 
                                     @can('delete-rol')
-                                        {!! Form::open(['method'=>'DELETE','route'=> ['roles.destroy', $role->id]]) !!}
-                                        {!! Form::submit(trans('Delete')) !!}
-                                        {!! Form::close() !!}
+                                            <div class="p-2">
+                                                <div class="inline-flex items-center bg-white leading-none text-black-600 rounded-full p-2 shadow text-teal text-sm">
+                                                    {!! Form::open(['method'=>'DELETE','route'=> ['roles.destroy', $role->id]]) !!}
+                                                    {!! Form::submit(trans('Delete')) !!}
+                                                    {!! Form::close() !!}
+                                                </div>
+                                            </div>
+
                                     @endcan
                                 </td>
                             </tr>
