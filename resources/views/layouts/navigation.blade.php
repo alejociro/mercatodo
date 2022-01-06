@@ -13,20 +13,23 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Inicio') }}
+                        {{ trans('Home') }}
                     </x-nav-link>
                 </div>
+               @can('see-user')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
-                        {{ __('Usuarios') }}
+                        {{ trans('Users') }}
                     </x-nav-link>
                 </div>
+                @endif
+                @can('see-rol')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.index')">
-                        {{ __('Roles') }}
+                        {{ trans('Roles') }}
                     </x-nav-link>
                 </div>
-
+                @endcan
             </div>
 
             <!-- Settings Dropdown -->

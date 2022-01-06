@@ -11,7 +11,7 @@
                 <div class="p-6 bg-white border-b border-gray-200">
                     @if($errors->any())
                         <div class="alert alert-dark alert-dimissible fade show" role="alert">
-                            <strong>Revise los campos!</strong>
+                            <strong>{{trans('Check the fields')}}</strong>
                             @foreach($errors->all() as $error)
                                 <span class="badge badge-danger">{{$error}}</span>
                             @endforeach
@@ -24,12 +24,12 @@
                     <div>
                         <div>
                             <div>
-                                <label >Nombre del Rol</label>
+                                <label >{{trans('Role name')}}</label>
                                 {!! Form::text('name', null, array('class'=>'form-control')) !!}
                             </div>
                         </div>
                         <div>
-                            <label for="">Permisos para este rol</label>
+                            <label for="">{{trans('Permissions for this rol')}}</label>
                             <br/>
                             @foreach($permission as $value)
                                 <label>{{ Form::checkbox('permission[]', $value->id, in_array($value->id, $rolePermissions) ? true : false, array('class' => 'name')) }}
@@ -38,7 +38,7 @@
                             @endforeach
                         </div>
                     </div>
-                        <button>Guardar</button>
+                        <button>{{trans('Save')}}</button>
                 </div>
                 {!! Form::close() !!}
             </div>

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Crear roles') }}
+            {{ trans('Create roles') }}
         </h2>
     </x-slot>
 
@@ -24,13 +24,13 @@
                     {!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}
                     <div>
                         <div>
-                            <label>Nombre del Rol</label>
+                            <label>{{trans('Role name')}}</label>
                             {!! Form::text('name', '', array('class'=>'form-control')) !!}
                         </div>
                     </div>
                     <div>
                         <div>
-                            <label>Permisos para ester Rol:</label>
+                            <label>{{trans('Permissions for this role')}}</label>
                             <br/>
                             @foreach($permission as $value)
                                 <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                <button>Guardar</button>
+                <button>{{trans('Save')}}</button>
                 {!! Form::close() !!}
             </div>
         </div>

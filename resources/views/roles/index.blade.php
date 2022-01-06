@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Roles') }}
+            {{ trans('Roles') }}
         </h2>
     </x-slot>
 
@@ -9,27 +9,28 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
-
-                    @can('crear-rol')
-                        <a href="{{ route('roles.create') }}">Crear</a>
+                    <div class="bg-white rounded-lg shadow-sm p-2 text-center flex flex-col gap-5">
+                        <h1 class="bg-lime-500">{{trans('Table of users')}}</h1>
+                    @can('create-rol')
+                        <a href="{{ route('roles.create') }}">{{trans('Create')}}</a>
                     @endcan
                     <table >
                         <thead >
-                        <th >Rol</th>
-                        <th >Acciones</th>
+                        <th >{{trans('Rol')}}</th>
+                        <th >{{trans('Actions')}}</th>
                         </thead>
                         <tbody>
                         @foreach($roles as $role)
                             <tr>
                                 <td>{{ $role->name }}</td>
                                 <td>
-                                    @can('editar.rol')
-                                        <a href="{{ route('roles.edit', $role->id) }}">Editar</a>
+                                    @can('edit-rol')
+                                        <a href="{{ route('roles.edit', $role->id) }}">{{trans('Edit')}}</a>
                                     @endcan
 
-                                    @can('borrar-rol')
+                                    @can('delete-rol')
                                         {!! Form::open(['method'=>'DELETE','route'=> ['roles.destroy', $role->id]]) !!}
-                                        {!! Form::submit('Borrar') !!}
+                                        {!! Form::submit(trans('Delete')) !!}
                                         {!! Form::close() !!}
                                     @endcan
                                 </td>
