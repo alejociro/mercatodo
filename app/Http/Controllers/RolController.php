@@ -18,7 +18,6 @@ class RolController extends Controller
         $this->middleware('permission:create-rol', ['only'=>['create','store']]);
         $this->middleware('permission:edit-rol', ['only'=>['edit','update']]);
         $this->middleware('permission:delete-rol',['only'=>['destroy']]);
-
     }
     /**
      * Display a listing of the resource.
