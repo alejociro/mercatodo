@@ -12,7 +12,21 @@
 */
 
 return [
-    'failed'   => 'Estas credenciales no coinciden con nuestros registros.',
-    'password' => 'La contraseña ingresada no es correcta.',
-    'throttle' => 'Demasiados intentos de acceso. Por favor intente nuevamente en :seconds segundos.',
+    'failed' => 'Las credenciales no coinciden con nuestros registros.',
+    'password' => 'La contraseña es incorrecta.',
+    'throttle' => 'Muchos intentos. Por favor intenta de nuevo en :seconds segundos.',
+
+    'remember' => 'Recuerdame',
+    'name' => 'Nombre',
+    'email' => 'Correo Electrónico',
+    'field_password' => 'Contraseña',
+    'forgot' => 'Olvidaste tu contraseña?',
+    'login' => 'Iniciar Sesión',
+    'login_title' => 'Mercatodo',
+
+    'register' => 'Registrate',
+    'password_confirmation' => 'Confirmación de contraseña',
+    'register_title' => 'Bienvenido! Debes crear una cuenta',
+    'already_register' => 'Ya estás registrado?',
+    'logout' => 'Cerrar Sesión',
 ];
