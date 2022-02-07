@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\Filters\FilterProduct;
-use App\Http\Requests\Products\StoreProductRequest;
+use App\Http\Requests\Admin\Products\StoreProductRequest;
+use App\Http\Requests\Admin\Users\UpdateUserRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -13,7 +14,7 @@ class ProductController extends Controller
 {
     function __construct()
     {
-        $this->middleware('permission:see-product|create-product|edit-product|delete-product', ['only' => ['index']]);
+        $this->middleware('permission:see-product|create-product|edit-product|delete-product', ['only' => ['index','show']]);
         $this->middleware('permission:create-product', ['only'=>['create','store']]);
         $this->middleware('permission:edit-product', ['only'=>['edit','update']]);
         $this->middleware('permission:delete-product',['only'=>['destroy']]);
@@ -48,20 +49,17 @@ class ProductController extends Controller
 
     public function show(Product $product): View
     {
-        return view('products.show', compact('product'));
+        $currency = config('app.currency');
+        return view('products.show', compact('product','currency'));
     }
 
     public function edit(Product $product): View
     {
-        return view('products.edit', ['product' => $product]);
+        return view('products.edit', compact('product'));
     }
 
-    public function update(Request $request, Product $product): RedirectResponse
+    public function update(UpdateUserRequest $request, Product $product): RedirectResponse
     {
-        $request->validate([
-            'name' => 'required'
-        ]);
-
         $prod = $request->all();
         if($image = $request->file('image')){
             $routeSaveImg = 'image/';
@@ -71,7 +69,6 @@ class ProductController extends Controller
         }else{
             unset($prod['image']);
         }
-
         $product->update($prod);
         return redirect()->route('products.index');
     }
