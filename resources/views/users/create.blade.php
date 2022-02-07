@@ -4,62 +4,76 @@
             {{ trans('Create an user') }}
         </h2>
     </x-slot>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    @if($errors->any())
-                        <div class="alert alert-dark alert-dimissible fade show" role="alert">
-                            <strong>{{trans('Check the fields')}}</strong>
-                            @foreach($errors->all() as $error)
-                                <span class="badge badge-danger">{{$error}}</span>
-                            @endforeach
-                            <button type="button" class="close" data-dimiss="alert" aria-label="close">
-                                <span aria-hidden="true">&times</span>
-                            </button>
+    <div class="w-full">
+        <div class="bg-gradient-to-b from-orange-800 to-orange-400 h-96"></div>
+        <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
+            <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
+                <p class="text-3xl font-bold leading-7 text-center">Crear un usuario</p>
+                <form action="{{route('users.store')}}" method="POST">
+                    @csrf
+                    <div class="md:flex items-center mt-12">
+                        <div class="w-full md:w-1/2 flex flex-col">
+                            <label class="font-semibold leading-none">{{trans('Name')}}</label>
+                            <input id="name" name="name"
+                                   class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"
+                                   @class(['form-control', 'is-invalid' => $errors->has('name')]) value="{{ old('name') }}"
+                                   type="text" required/>
+                            @error('name')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
-                    @endif
-
-                    {!! Form::open(array('route'=>'users.store', 'method'=>'POST')) !!}
-                    <div class="row">
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <label for="name">{{trans('Name')}}</label>
-                                {!! Form::text('name', '', array('class'=>'form-control')) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <label for="email">{{trans('Email')}}</label>
-                                {!! Form::text('email', '', array('class'=>'form-control')) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <label for="password">{{trans('Password')}}</label>
-                                {!! Form::password('password', array('class'=>'form-control')) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <label for="confirm-password">{{trans('Confirm Password')}}</label>
-                                {!! Form::password('confirm-password', array('class'=>'form-control')) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <div class="form-group">
-                                <label for="">{{trans('Roles')}}</label>
-                                {!! Form::select('roles[]', $roles,[], array('class'=>'form-control')) !!}
-                            </div>
-                        </div>
-                        <div class="col-xs-12 col-sm-12 col-md-12">
-                            <button type="submit" class="btn btn-primary">{{trans('Save')}}</button>
+                        <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0 mt-4">
+                            <label class="font-semibold leading-none">{{trans('Email')}}</label>
+                            <input id="email" name="email"
+                                   class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"
+                                   @class(['form-control', 'is-invalid' => $errors->has('name')]) value="{{ old('email') }}"
+                                   type="text" required/>
+                            @error('email')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
                     </div>
-                        {!! Form::close() !!}
-                </div>
+                    <div class="md:flex items-center mt-12">
+                        <div class="w-full md:w-1/2 flex flex-col">
+                            <label class="font-semibold leading-none">{{trans('Password')}}</label>
+                            <input type="password" id="password" name="password"
+                                   class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"
+                                   @class(['form-control', 'is-invalid' => $errors->has('password')]) value="{{ old('password') }}"
+                                   type="text" required/>
+                            @error('password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0 mt-4">
+                            <label class="font-semibold leading-none">{{trans('Confirm password')}}</label>
+                            <input type="password" id="confirm-password" name="confirm-password"
+                                   class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"
+                                   @class(['form-control', 'is-invalid' => $errors->has('confirm-password')]) value="{{ old('confirm-password') }}"
+                                   type="text" required/>
+                            @error('confirm-password')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="flex items-center justify-center w-full">
+                            <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
+                                <a href="{{ route('users.index') }}"
+                                   class='w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>{{trans('Cancel')}}</a>
+                                <button type="submit"
+                                        class='w-auto bg-gradient-to-b from-orange-800 to-orange-400 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>{{trans('Create')}}</button>
+                            </div>
+                            </button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
 </x-app-layout>
+
+
+
+
+
+
+

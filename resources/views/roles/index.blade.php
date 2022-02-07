@@ -10,7 +10,7 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="bg-white rounded-lg shadow-sm p-2 text-center flex flex-col gap-5">
-                        <h1 class="bg-lime-500">{{trans('Table of users')}}</h1>
+                        <h1 class="bg-blue-500">{{trans('Table of users')}}</h1>
                     @can('create-rol')
                         <a href="{{ route('roles.create') }}">{{trans('Create')}}</a>
                     @endcan

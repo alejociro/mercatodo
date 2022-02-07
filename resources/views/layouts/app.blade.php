@@ -9,6 +9,7 @@
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+        <script src="https://cdn.tailwindcss.com"></script>
 
         <!-- Styles -->
         <link rel="stylesheet" href="{{ mix('css/app.css') }}">
@@ -32,5 +33,6 @@
                 {{ $slot }}
             </main>
         </div>
+        <script src="sweetalert2.all.min.js"></script>
     </body>
 </html>
