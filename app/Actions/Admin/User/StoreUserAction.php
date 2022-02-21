@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Actions;
+namespace App\Admin\Actions;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class StoreUserAction
 {
-    public function execute(array $data, User $user): User
+    public function execute(array $data,User $user): User
     {
-        $user= new User();
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = Hash::make($data['password']);
