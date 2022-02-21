@@ -26,7 +26,11 @@ class PermissionsSeeder extends Seeder
             'see-product',
             'create-product',
             'edit-product',
-            'delete-product'
+            'delete-product',
+            'see-category',
+            'create-category',
+            'edit-category',
+            'delete-category'
         ];
         foreach ($permissions as $permission) {
             Permission::create(['name'=>$permission]);
