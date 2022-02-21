@@ -46,6 +46,15 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0 mt-4">
+                            <label class="font-semibold leading-none" for="category_id">{{trans('Category')}}</label>
+                            <select class="form-control" name="category_id" id="category_id">
+                                <option disabled selected>{{trans('Select a category')}}</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="md:flex items-center mt-8">
                         <div class="w-full flex flex-col">
@@ -93,7 +102,6 @@
                 </form>
             </div>
         </div>
-    </div>
     </div>
 </x-app-layout>
 

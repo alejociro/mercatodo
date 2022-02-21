@@ -1,10 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\Product;
 
 use App\Helpers\Filters\FilterProduct;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Products\StoreProductRequest;
 use App\Http\Requests\Admin\Users\UpdateUserRequest;
+use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Models\Product;
@@ -23,14 +25,15 @@ class ProductController extends Controller
     public function index(Request $request): View
     {
         $search = $request->input('query');
-        $products = FilterProduct::filter($search)->select(['id','name','price','stock','disabled_at'])->paginate(5);
+        $products = FilterProduct::filter($search)->select(['id','name','price','stock','category_id','disabled_at'])->paginate(5)->withQueryString();
         $currency = config('app.currency');
-        return view('products.index', compact('products','currency'));
+        return view('admin.products.index', compact('products','currency'));
     }
 
     public function create(): View
     {
-        return view('products.create');
+        $categories = Category::get();
+        return view('admin.products.create', compact('categories'));
     }
 
     public function store(StoreProductRequest $request): RedirectResponse
@@ -50,12 +53,13 @@ class ProductController extends Controller
     public function show(Product $product): View
     {
         $currency = config('app.currency');
-        return view('products.show', compact('product','currency'));
+        return view('admin.products.show', compact('product','currency'));
     }
 
     public function edit(Product $product): View
     {
-        return view('products.edit', compact('product'));
+        $categories = Category::get();
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
     public function update(UpdateUserRequest $request, Product $product): RedirectResponse

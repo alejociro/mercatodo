@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\User;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
-
-//add
 use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -28,13 +27,13 @@ class RolController extends Controller
             return Role::paginate(5);
         });
 
-        return view('roles.index', compact('roles'));
+        return view('admin.roles.index', compact('roles'));
     }
 
     public function create(): View
     {
         $permission = Permission::get();
-        return view('roles.create', compact('permission'));
+        return view('admin.roles.create', compact('permission'));
     }
 
     public function store(Request $request): RedirectResponse
@@ -54,7 +53,7 @@ class RolController extends Controller
         $rolePermissions = DB::table('role_has_permissions')->where('role_has_permissions.role_id',$id)
             ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
             ->all();
-        return view('roles.edit', compact('role','permission','rolePermissions'));
+        return view('admin.roles.edit', compact('role','permission','rolePermissions'));
     }
 
     public function update(Request $request, $id): RedirectResponse

@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ trans('Users') }}
+            {{ trans('Products') }}
         </h2>
     </x-slot>
 
@@ -47,7 +47,7 @@
                                         <td>{{$product->name}}</td>
                                         <td>{{$product->price}}{{$currency}}</td>
                                         <td>{{$product->stock}}</td>
-                                        <td>{{$product->category}}</td>
+                                        <td>{{$product->category->name}}</td>
                                         <td>
                                             @if($product->disabled_at == null)
                                                 {{trans('Enabled')}}
@@ -64,12 +64,12 @@
                                                 <!-- botón borrar -->
                                                 <div
                                                     class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">
-                                                    <form action="{{ route('products.destroy', $product->id) }}"
-                                                          method="POST" class="formEliminar">
+                                                    <form action="{{ route('products.destroy', $product) }}" method="POST" class="formEliminar">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit">Borrar</button>
+                                                        <button type="submit" >Borrar</button>
                                                     </form>
+
                                                 </div>
                                                 <div
                                                     class="inline-flex items-center bg-white leading-none text-black-600 rounded-full p-2 shadow text-teal text-sm">
@@ -116,16 +116,16 @@
                     event.preventDefault()
                     event.stopPropagation()
                     Swal.fire({
-                        title: '¿Confirma la eliminación del registro?',
+                        title: '¿CONFIRMA LA ELIMINACIÓN DEL PRODUCTO?',
                         icon: 'info',
                         showCancelButton: true,
                         confirmButtonColor: '#20c997',
                         cancelButtonColor: '#6c757d',
-                        confirmButtonText: 'Confirmar'
+                        confirmButtonText: 'CONFIRMAR'
                     }).then((result) => {
                         if (result.isConfirmed) {
                             this.submit();
-                            Swal.fire('¡Eliminado!', 'El registro ha sido eliminado exitosamente.', 'success');
+                            Swal.fire('¡ELIMINADO!', 'EL PRODUCTO HA SIDO ELIMINADO EXITOSAMENTE.','success');
                         }
                     })
                 }, false)

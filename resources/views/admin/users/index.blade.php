@@ -74,7 +74,7 @@
                                         <div class="p-2">
                                             <div
                                                 class="inline-flex items-center bg-white leading-none text-black-600 rounded-full p-2 shadow text-teal text-sm">
-                                                <form action="{{ route('changeUserStatus', $user->id) }}"
+                                                <form action="{{ route('changeUserStatus', $user) }}"
                                                       method="POST">
                                                     @csrf
                                                     @method('PUT')

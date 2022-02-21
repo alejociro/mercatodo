@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\User;
 
 
-use App\Actions\StoreUserAction;
+use App\Admin\Actions\StoreUserAction;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Users\StoreUserRequest;
 use App\Http\Requests\Admin\Users\UpdateUserRequest;
 use Illuminate\Http\RedirectResponse;
@@ -27,13 +28,13 @@ class UserController extends Controller
     public function index(): View
     {
         $users = User::paginate(5);
-        return view('users.index', compact('users'));
+        return view('admin.users.index', compact('users'));
     }
 
     public function create(): View
     {
-        $roles = Role::pluck('name','name')->all();
-        return view('users.create', compact('roles'));
+        $roles = Role::all();
+        return view('admin.users.create', compact('roles'));
     }
 
     public function store(StoreUserRequest $request, StoreUserAction $storeUserAction): RedirectResponse
@@ -42,16 +43,14 @@ class UserController extends Controller
         return redirect()->route('users.index');
     }
 
-    public function edit($id): View
+    public function edit(User $user): View
     {
-        $user = User::find($id);
         $roles = Role::pluck('name','name')->all();
         $userRole = $user->roles->pluck('name','name')->all();
-
-        return view('users.edit', compact('user','roles','userRole'));
+        return view('admin.users.edit', compact('user','roles','userRole'));
     }
 
-    public function update(UpdateUserRequest $request, $id): RedirectResponse
+    public function update(UpdateUserRequest $request, User $user): RedirectResponse
     {
         $input= $request->all();
         if(!empty($input['password'])){
@@ -59,18 +58,16 @@ class UserController extends Controller
         }else{
             $input = Arr::except($input, array('password'));
         }
-
-        $user = User::find($id);
         $user->update($input);
-        DB::table('model_has_roles')->where('model_id',$id)->delete();
+        DB::table('model_has_roles')->where('model_id',$user->id)->delete();
 
         $user->assignRole($request->input('roles'));
         return redirect()->route('users.index');
     }
 
-    public function destroy($id): RedirectResponse
+    public function destroy(User $user): RedirectResponse
     {
-        User::find($id)->delete();
+        $user->delete();
         return redirect()->route('users.index' );
     }
 }

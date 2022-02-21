@@ -62,7 +62,6 @@
                                 <button type="submit"
                                         class='w-auto bg-gradient-to-b from-orange-800 to-orange-400 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>{{trans('Update')}}</button>
                             </div>
-                            </button>
                         </div>
                     </div>
                 </form>

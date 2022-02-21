@@ -54,6 +54,15 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0 mt-4">
+                            <label class="font-semibold leading-none">{{trans('Select a rol')}}</label>
+                            <select class="form-control" id="roles" name="roles">
+                                <option selected disabled>Seleccione uno de los roles</option>
+                                @foreach($roles as $rol)
+                                    <option value="{{$rol->name}}">{{$rol->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                         <div class="flex items-center justify-center w-full">
                             <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
                                 <a href="{{ route('users.index') }}"
@@ -61,7 +70,6 @@
                                 <button type="submit"
                                         class='w-auto bg-gradient-to-b from-orange-800 to-orange-400 hover:bg-purple-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>{{trans('Create')}}</button>
                             </div>
-                            </button>
                         </div>
                     </div>
                 </form>
