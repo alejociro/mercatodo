@@ -21,7 +21,7 @@ class IndexProductTest extends TestCase
         $user = User::factory()->create()->givePermissionTo('see-product');
         $response = $this->actingAs($user)->get(route('products.index'));
         $response->assertStatus(200);
-        $response->assertViewIs('products.index');
+        $response->assertViewIs('admin.products.index');
         $response->assertViewHas('products');
     }
 

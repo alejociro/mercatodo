@@ -8,7 +8,7 @@ class FilterProduct
 {
     Public Static function filter($search)
     {
-        $products = Product::where('name','LIKE','%'. $search . '%');
+        $products = Product::where('name','LIKE','%'. $search . '%')->orderby('name');
         return $products;
     }
 }

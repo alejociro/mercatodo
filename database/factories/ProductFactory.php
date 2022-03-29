@@ -7,11 +7,6 @@ use Illuminate\Http\UploadedFile;
 
 class ProductFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
     public function definition(): array
     {
         return [

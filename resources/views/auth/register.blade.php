@@ -10,21 +10,37 @@
         <form method="POST" action="{{ route('register') }}">
             @csrf
             <h1 class="text-xl md:text-2xl font-bold leading-tight mt-12 mb-3">{{ trans('auth.register_title') }}</h1>
-            <!-- Name -->
+
             <div>
                 <x-label for="name" :value="trans('auth.name')" />
 
                 <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
             </div>
 
-            <!-- Email Address -->
+             <div>
+                <x-label for="surname" :value="trans('auth.surname')" />
+
+                <x-input id="surname" class="block mt-1 w-full" type="text" name="surname" :value="old('surname')" required autofocus />
+            </div>
+
             <div class="mt-4">
                 <x-label for="email" :value="trans('auth.email')" />
 
                 <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
-            <!-- Password -->
+            <div class="mt-4">
+                <x-label for="document" :value="trans('auth.document')" />
+
+                <x-input id="document" class="block mt-1 w-full" type="text" name="document" :value="old('document')" required />
+            </div>
+
+            <div class="mt-4">
+                <x-label for="phone" :value="trans('auth.phone')" />
+
+                <x-input id="phone" class="block mt-1 w-full" type="text" name="phone" :value="old('phone')" required />
+            </div>
+
             <div class="mt-4">
                 <x-label for="password" :value="trans('auth.field_password')" />
 
@@ -34,7 +50,6 @@
                          required autocomplete="new-password" />
             </div>
 
-            <!-- Confirm Password -->
             <div class="mt-4">
                 <x-label for="password_confirmation" :value="trans('auth.password_confirmation')" />
                 <x-input id="password_confirmation" class="block mt-1 w-full"

@@ -6,11 +6,11 @@
     </x-slot>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 bg-white border-b border-gray-200">
-                    <div class="bg-white rounded-lg shadow-sm p-2 text-center flex justify-center flex-col gap-5">
-                        <div class="container mx-auto px-6 py-3">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
+            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg ">
+                <div class="p-2 bg-white border-b border-gray-200">
+                    <div class="bg-white rounded-lg shadow-sm text-center flex justify-center flex-col gap-5">
+                        <div class="container mx-auto px-6 py-3 ">
                             <div class="flex items-center justify-between">
                                 <div class="hidden w-full text-gray-600 md:flex md:items-center">
                                     <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"
@@ -24,30 +24,6 @@
                                     </svg>
                                     <span class="mx-1 text-sm">Col</span>
                                 </div>
-                                <div class="w-full text-gray-700 md:text-center text-2xl font-semibold">
-                                    Brand
-                                </div>
-                                <div class="flex items-center justify-end w-full">
-                                    <button @click="cartOpen = !cartOpen"
-                                            class="text-gray-600 focus:outline-none mx-4 sm:mx-0">
-                                        <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"
-                                             stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path
-                                                d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path>
-                                        </svg>
-                                    </button>
-
-                                    <div class="flex sm:hidden">
-                                        <button @click="isOpen = !isOpen" type="button"
-                                                class="text-gray-600 hover:text-gray-500 focus:outline-none focus:text-gray-500"
-                                                aria-label="toggle menu">
-                                            <svg viewBox="0 0 24 24" class="h-6 w-6 fill-current">
-                                                <path fill-rule="evenodd"
-                                                      d="M4 5h16a1 1 0 0 1 0 2H4a1 1 0 1 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2zm0 6h16a1 1 0 0 1 0 2H4a1 1 0 0 1 0-2z"></path>
-                                            </svg>
-                                        </button>
-                                    </div>
-                                </div>
                             </div>
                             <nav :class="isOpen ? '' : 'hidden'" class="sm:flex sm:justify-center sm:items-center mt-4">
                                 <div class="flex flex-col sm:flex-row">
@@ -60,13 +36,13 @@
                                 </div>
                             </nav>
                             <div class="relative mt-6 max-w-lg mx-auto">
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
-                    <path
-                        d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </span>
+                                  <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
+                                      <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
+                                      <path
+                                      d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
+                                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                      </svg>
+                                      </span>
                                 <form action="{{route('productos')}}" method="GET">
                                     <span class="text-danger">@error('queryUser'){{ $message }} @enderror</span>
                                     <input type="text" class="form-control" name="query"
@@ -82,26 +58,38 @@
                         </div>
 
 
-                        <div class="bg-white min-h-screen py-32 px-10">
+                        <div class="bg-white py-5 px-10">
                             <div
                                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6  ">
                                 @foreach ($products as $product)
                                     <div
                                         class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300  flex flex-row items-center bg-gray-100">
-                                        <img src="/image/{{$product->image}}" width="50%" alt=""
-                                             class="rounded-t-lg bg-gray-100">
+                                        <div class="flex px-2">
+                                            <img src="/image/{{$product->image}}" width="50%" alt=""
+                                                 class="w-full rounded-t-lg bg-gray-100 ">
+                                        </div>
                                         <div class="p-6">
                                             <h1 class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">{{$product->name}}</h1>
-                                            <p class="text-gray-700 my-2 hover-text-900 ">{{$product->value}}{{$currency}}</p>
-                                            <button
-                                                class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                                                {{trans('Add to cart')}}
-                                            </button>
+                                            <p class="text-gray-700 my-2 hover-text-900 ">{{$product->PriceFormat}}{{$currency}}</p>
+                                            <div class="flex-grow">
+                                                <div class="flex-column">
+                                                    <form method="POST"
+                                                          action="{{ route('shoppingCarts.items.store',['shoppingCart'=>$shoppingCart, 'product'=>$product]) }}">
+                                                        @csrf
+                                                        <button
+                                                            class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
+                                                            {{trans('Add to cart')}}
+                                                        </button>
+                                                        <input width="" id="quantity" name="quantity" type="number"
+                                                               min="1"
+                                                               class="w-28 my-2 border-2 border-black-300 rounded "
+                                                               placeholder="quantity">
+                                                    </form>
+                                                </div>
+                                            </div>
                                         </div>
-
                                     </div>
                                 @endforeach
-
                             </div>
                         </div>
                         <div>

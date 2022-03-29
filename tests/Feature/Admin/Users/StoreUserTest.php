@@ -32,9 +32,12 @@ class StoreUserTest extends TestCase
     {
         return [
             'name' => 'julian',
+            'surname' => 'Castrillon',
             'email' => 'julian@test.com',
+            'document' => '1000748309',
+            'phone' => '3114277390',
             'password' => '12345678',
-            'confirm-password' => '12345678' ,
+            'confirm-password' => '12345678',
         ];
     }
 //

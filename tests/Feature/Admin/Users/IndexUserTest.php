@@ -22,7 +22,7 @@ class IndexUserTest extends TestCase
         $user = User::factory()->create()->givePermissionTo('see-user');
         $response = $this->actingAs($user)->get(route('users.index'));
         $response->assertStatus(200);
-        $response->assertViewIs('users.index');
+        $response->assertViewIs('admin.users.index');
         $response->assertViewHas('users');
     }
 
