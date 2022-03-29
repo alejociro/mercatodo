@@ -22,7 +22,7 @@ class EditProductTest extends TestCase
         $user = User::factory()->create()->givePermissionTo('edit-product');
         $response = $this->actingAs($user)->get("/products/{$product->id}/edit");
         $response->assertStatus(200);
-        $response->assertViewIs('products.edit');
+        $response->assertViewIs('admin.products.edit');
         $response->assertViewHas('product');
     }
 }
