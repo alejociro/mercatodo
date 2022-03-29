@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers\Admin\User;
 
-
-use App\Admin\Actions\StoreUserAction;
+use App\Actions\Admin\User\StoreUserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Users\StoreUserRequest;
 use App\Http\Requests\Admin\Users\UpdateUserRequest;
@@ -27,7 +26,7 @@ class UserController extends Controller
 
     public function index(): View
     {
-        $users = User::paginate(5);
+        $users = User::orderby('name')->paginate(5);
         return view('admin.users.index', compact('users'));
     }
 

@@ -73,6 +73,7 @@ class ProductController extends Controller
         }else{
             unset($prod['image']);
         }
+
         $product->update($prod);
         return redirect()->route('products.index');
     }

@@ -24,7 +24,7 @@ class CategoryController extends Controller
 
     public function index(): View
     {
-        $categories = Category::paginate(5);
+        $categories = Category::orderby('name')->paginate(5);
         return view('admin.category.index', compact('categories'));
     }
 
@@ -36,7 +36,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request, StoreCategoryAction $storeCategoryAction): RedirectResponse
     {
         $storeCategoryAction->execute($request->validated(), new Category());
-        return redirect()->route('category.index');
+        return redirect()->route('categories.index');
     }
 
     public function edit(Category $category): View
@@ -47,12 +47,12 @@ class CategoryController extends Controller
     public function update(UpdateCategoryRequest $request,UpdateCategoryAction $updateCategoryAction ,Category $category): RedirectResponse
     {
         $updateCategoryAction->execute($request->validated(), new $category);
-        return redirect()->route('category.index');
+        return redirect()->route('categories.index');
     }
 
     public function destroy(Category $category): RedirectResponse
     {
         $category->delete();
-        return redirect()->route('category.index' );
+        return redirect()->route('categories.index' );
     }
 }
