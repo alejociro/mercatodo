@@ -1,8 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ trans('Products') }}
-        </h2>
+        <div class="flex">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ trans('Categories') }}
+            </h2>
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
+                    {{ trans('Products') }}
+                </x-nav-link>
+            </div>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -36,10 +43,11 @@
                                                    class="inline-flex items-center bg-white leading-none text-green-600 rounded-full p-2 shadow text-teal text-sm">Editar</a>
                                                 <div
                                                     class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">
-                                                    <form action="{{ route('categories.destroy', $category) }}" method="POST" class="formEliminar">
+                                                    <form action="{{ route('categories.destroy', $category) }}"
+                                                          method="POST" class="formEliminar">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" >Borrar</button>
+                                                        <button type="submit">Borrar</button>
                                                     </form>
                                                 </div>
                                             </div>

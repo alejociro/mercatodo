@@ -1,8 +1,15 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ trans('Users') }}
-        </h2>
+        <div class="flex">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ trans('Users') }}
+            </h2>
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <x-nav-link :href="route('paymentAdmin')" :active="request()->routeIs('paymentAdmin')">
+                    {{ trans('Payments of users') }}
+                </x-nav-link>
+            </div>
+        </div>
     </x-slot>
 
     <div class="py-12">

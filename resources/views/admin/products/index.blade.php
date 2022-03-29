@@ -1,8 +1,16 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ trans('Products') }}
-        </h2>
+        <div class="flex">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ trans('Products') }}
+            </h2>
+            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
+                    {{ trans('Categories') }}
+                </x-nav-link>
+            </div>
+        </div>
+
     </x-slot>
 
     <div class="py-12">
@@ -45,7 +53,7 @@
                                     <tr>
                                         <td>{{$product->id}}</td>
                                         <td>{{$product->name}}</td>
-                                        <td>{{$product->price}}{{$currency}}</td>
+                                        <td>{{$product->price_format}}{{$currency}}</td>
                                         <td>{{$product->stock}}</td>
                                         <td>{{$product->category->name}}</td>
                                         <td>
@@ -64,10 +72,11 @@
                                                 <!-- botón borrar -->
                                                 <div
                                                     class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">
-                                                    <form action="{{ route('products.destroy', $product) }}" method="POST" class="formEliminar">
+                                                    <form action="{{ route('products.destroy', $product) }}"
+                                                          method="POST" class="formEliminar">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" >Borrar</button>
+                                                        <button type="submit">Borrar</button>
                                                     </form>
 
                                                 </div>
@@ -125,7 +134,7 @@
                     }).then((result) => {
                         if (result.isConfirmed) {
                             this.submit();
-                            Swal.fire('¡ELIMINADO!', 'EL PRODUCTO HA SIDO ELIMINADO EXITOSAMENTE.','success');
+                            Swal.fire('¡ELIMINADO!', 'EL PRODUCTO HA SIDO ELIMINADO EXITOSAMENTE.', 'success');
                         }
                     })
                 }, false)
