@@ -4,7 +4,7 @@ return [
         'fields' => [
             'code' => 'Code',
             'name' => 'Nombre',
-            'value' => 'Valor',
+            'price' => 'Precio',
             'stock' => 'Cantidad',
             'status' => 'Estado',
             'image' => 'Imagen',

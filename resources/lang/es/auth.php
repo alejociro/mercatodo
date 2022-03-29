@@ -18,7 +18,10 @@ return [
 
     'remember' => 'Recuerdame',
     'name' => 'Nombre',
+    'surname' => 'Apellido',
     'email' => 'Correo Electrónico',
+    'document' => 'Documento',
+    'phone' => 'Celular',
     'field_password' => 'Contraseña',
     'forgot' => 'Olvidaste tu contraseña?',
     'login' => 'Iniciar Sesión',
