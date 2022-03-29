@@ -21,7 +21,7 @@ class IndexRoleTest extends TestCase
         $user = User::factory()->create()->givePermissionTo('see-rol');
         $response = $this->actingAs($user)->get(route('roles.index'));
         $response->assertStatus(200);
-        $response->assertViewIs('roles.index');
+        $response->assertViewIs('admin.roles.index');
         $response->assertViewHas('roles');
     }
 
