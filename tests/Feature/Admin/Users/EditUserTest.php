@@ -21,7 +21,7 @@ class EditUserTest extends TestCase
         $user = User::factory()->create()->givePermissionTo('edit-user');
         $response = $this->actingAs($user)->get("/users/{$user2->id}/edit");
         $response->assertStatus(200);
-        $response->assertViewIs('users.edit');
+        $response->assertViewIs('admin.users.edit');
         $response->assertViewHas('user');
     }
 }
