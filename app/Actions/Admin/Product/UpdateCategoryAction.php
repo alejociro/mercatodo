@@ -2,10 +2,16 @@
 
 namespace App\Actions\Admin\Product;
 
+use App\Models\Category;
+
 class UpdateCategoryAction
 {
-    public function execute(array $data, Product $product): Product
+    public function execute(array $data, Category $category): Category
     {
-        return parent::execute($data, $product);
+        $category->name = $data['name'];
+        $category->description = $data['description'];
+        $category->save();
+
+        return $category;
     }
 }
