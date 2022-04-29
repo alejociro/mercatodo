@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\User;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Roles\StoreRolRequest;
+use App\Http\Requests\Admin\Roles\UpdateRolRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Http\Request;
@@ -36,14 +38,11 @@ class RolController extends Controller
         return view('admin.roles.create', compact('permission'));
     }
 
-    public function store(Request $request): RedirectResponse
+    public function store(StoreRolRequest $request): RedirectResponse
     {
-        $this->validate($request, ['name'=>'required', 'permission'=>'required']);
         $role = Role::create(['name'=>$request->input('name')]);
         $role->syncPermissions($request->input('permission'));
-
-        Cache::forget('roles');
-        return redirect()->route('roles.index');
+        return redirect()->route('admin.roles.index');
     }
 
     public function edit($id): View
@@ -56,23 +55,17 @@ class RolController extends Controller
         return view('admin.roles.edit', compact('role','permission','rolePermissions'));
     }
 
-    public function update(Request $request, $id): RedirectResponse
+    public function update(UpdateRolRequest $request, Role $role): RedirectResponse
     {
-        $this->validate($request, ['name'=>'required']);
-
-        $role = Role::find($id);
         $role->name = $request->input('name');
         $role->save();
-
-        Cache::forget('roles');
         $role->syncPermissions($request->input('permission'));
-        return redirect()->route('roles.index');
+        return redirect()->route('admin.roles.index');
     }
 
     public function destroy($id): RedirectResponse
     {
-        Cache::forget('roles');
         DB::table('roles')->where('id', $id)->delete();
-        return redirect()->route('roles.index');
+        return redirect()->route('admin.roles.index');
     }
 }

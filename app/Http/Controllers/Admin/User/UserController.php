@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin\User;
 
+use App\Actions\Admin\DeleteModelAction;
 use App\Actions\Admin\User\StoreUserAction;
+use App\Actions\Admin\User\UpdateUserAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Users\StoreUserRequest;
 use App\Http\Requests\Admin\Users\UpdateUserRequest;
@@ -10,9 +12,6 @@ use Illuminate\Http\RedirectResponse;
 use App\Models\User;
 use Illuminate\View\View;
 use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
@@ -39,7 +38,7 @@ class UserController extends Controller
     public function store(StoreUserRequest $request, StoreUserAction $storeUserAction): RedirectResponse
     {
         $storeUserAction->execute($request->validated(), new User());
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
     }
 
     public function edit(User $user): View
@@ -49,25 +48,17 @@ class UserController extends Controller
         return view('admin.users.edit', compact('user','roles','userRole'));
     }
 
-    public function update(UpdateUserRequest $request, User $user): RedirectResponse
+    public function update(UpdateUserRequest $request, User $user, UpdateUserAction $updateUserAction): RedirectResponse
     {
-        $input= $request->all();
-        if(!empty($input['password'])){
-            $input['password'] = Hash::make($input['password']);
-        }else{
-            $input = Arr::except($input, array('password'));
-        }
-        $user->update($input);
-        DB::table('model_has_roles')->where('model_id',$user->id)->delete();
-
+        $updateUserAction->execute($request->all(), $user);
         $user->assignRole($request->input('roles'));
-        return redirect()->route('users.index');
+        return redirect()->route('admin.users.index');
     }
 
-    public function destroy(User $user): RedirectResponse
+    public function destroy(User $user, DeleteModelAction $deleteModelAction): RedirectResponse
     {
-        $user->delete();
-        return redirect()->route('users.index' );
+        $deleteModelAction->execute($user);
+        return redirect()->route('admin.users.index' );
     }
 }
 
