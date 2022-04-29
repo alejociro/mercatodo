@@ -17,6 +17,7 @@ class ProductUserController extends Controller
         $products = FilterProduct::filter($search)
                     ->whereNull('disabled_at')->paginate(6)->withQueryString();
         $currency = config('app.currency');
+
         return view('products.user', compact('products','currency','shoppingCart'));
     }
 }

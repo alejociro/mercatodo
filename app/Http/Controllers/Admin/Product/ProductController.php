@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Admin\Product;
 
+use App\Actions\Admin\DeleteModelAction;
+use App\Actions\Admin\Product\StoreProductAction;
+use App\Actions\Admin\Product\UpdateProductAction;
+use App\Actions\Admin\StoreOrUpdateImage;
 use App\Helpers\Filters\FilterProduct;
+use App\Helpers\Products\StoreFormatImage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Products\StoreProductRequest;
-use App\Http\Requests\Admin\Users\UpdateUserRequest;
+use App\Http\Requests\Admin\Products\UpdateProductRequest;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -24,8 +29,7 @@ class ProductController extends Controller
 
     public function index(Request $request): View
     {
-        $search = $request->input('query');
-        $products = FilterProduct::filter($search)->select(['id','name','price','stock','category_id','disabled_at'])->paginate(5)->withQueryString();
+        $products = FilterProduct::filter($request->input('query'))->select(['id','name','price','stock','category_id','disabled_at'])->paginate(5)->withQueryString();
         $currency = config('app.currency');
         return view('admin.products.index', compact('products','currency'));
     }
@@ -36,18 +40,10 @@ class ProductController extends Controller
         return view('admin.products.create', compact('categories'));
     }
 
-    public function store(StoreProductRequest $request): RedirectResponse
+    public function store(StoreProductRequest $request, StoreProductAction $storeProductAction, StoreFormatImage $formatImage): RedirectResponse
     {
-        $data = $request->all();
-        if($image = $request->file('image')) {
-            $routeSaveImg = 'image/';
-            $imageProduct = date('YmdHis'). "." . $image->getClientOriginalExtension();
-            $image->move($routeSaveImg, $imageProduct);
-            $data['image'] = "$imageProduct";
-        }
-
-        Product::create($data);
-        return redirect()->route('products.index');
+        $storeProductAction->execute($request->validated(),new Product(), $formatImage->saveImage($request->file('image')),$request['category_id']);
+        return redirect()->route('admin.products.index');
     }
 
     public function show(Product $product): View
@@ -62,25 +58,16 @@ class ProductController extends Controller
         return view('admin.products.edit', compact('product', 'categories'));
     }
 
-    public function update(UpdateUserRequest $request, Product $product): RedirectResponse
+    public function update(UpdateProductRequest $request, Product $product, UpdateProductAction $updateProductAction, StoreOrUpdateImage $updateImage): RedirectResponse
     {
-        $prod = $request->all();
-        if($image = $request->file('image')){
-            $routeSaveImg = 'image/';
-            $imageProduct = date('YmdHis') . "." . $image->getClientOriginalExtension();
-            $image->move($routeSaveImg, $imageProduct);
-            $prod['image'] = "$imageProduct";
-        }else{
-            unset($prod['image']);
-        }
-
-        $product->update($prod);
-        return redirect()->route('products.index');
+        $updateImage->updateImage($request->file('image'), $product);
+        $updateProductAction->execute($request->validated(), $product,$request['category_id']);
+        return redirect()->route('admin.products.index');
     }
 
-    public function destroy(Product $product): RedirectResponse
+    public function destroy(Product $product, DeleteModelAction $deleteModelAction): RedirectResponse
     {
-        $product->delete();
-        return redirect()->route('products.index');
+        $deleteModelAction->execute($product);
+        return redirect()->route('admin.products.index');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Product;
 
+use App\Actions\Admin\DeleteModelAction;
 use App\Actions\Admin\Product\StoreCategoryAction;
 use App\Actions\Admin\Product\UpdateCategoryAction;
 use App\Http\Controllers\Controller;
@@ -36,7 +37,7 @@ class CategoryController extends Controller
     public function store(StoreCategoryRequest $request, StoreCategoryAction $storeCategoryAction): RedirectResponse
     {
         $storeCategoryAction->execute($request->validated(), new Category());
-        return redirect()->route('categories.index');
+        return redirect()->route('admin.categories.index');
     }
 
     public function edit(Category $category): View
@@ -46,13 +47,13 @@ class CategoryController extends Controller
 
     public function update(UpdateCategoryRequest $request,UpdateCategoryAction $updateCategoryAction ,Category $category): RedirectResponse
     {
-        $updateCategoryAction->execute($request->validated(), new $category);
-        return redirect()->route('categories.index');
+        $updateCategoryAction->execute($request->validated(), $category);
+        return redirect()->route('admin.categories.index');
     }
 
-    public function destroy(Category $category): RedirectResponse
+    public function destroy(Category $category, DeleteModelAction $deleteModelAction): RedirectResponse
     {
-        $category->delete();
-        return redirect()->route('categories.index' );
+        $deleteModelAction->execute($category);
+        return redirect()->route('admin.categories.index' );
     }
 }
