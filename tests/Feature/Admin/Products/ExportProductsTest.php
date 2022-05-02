@@ -20,11 +20,9 @@ class ExportProductsTest extends TestCase
 
         Permission::create(['name' => 'see-product']);
         $user = User::factory()->create()->givePermissionTo('see-product');
-        $this->actingAs($user)->get('/products/store/xlsx');
-
-        Excel::assertStored('products.xlsx', function(ProductsExport $export) {
-        return true;
-    });
+        $response = $this->actingAs($user)->get(route('admin.export.products'));
+        $response->assertOk();
+        Excel::assertQueued('products.xlsx', 'public');
     }
 
     public function test_it_can_download_payments_export()
