@@ -11,14 +11,16 @@ class ExportActionReady extends Notification
 {
     use Queueable;
 
+    protected string $filePath;
+
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($filePath)
     {
-        //
+        $this->filePath = $filePath;
     }
 
     /**
@@ -41,9 +43,9 @@ class ExportActionReady extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage())
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->line('Aqui tienes el link para descargar el archivo.')
+                    ->action('Descargar', $this->filePath)
+                    ->line('Mercatodo!!');
     }
 
     /**

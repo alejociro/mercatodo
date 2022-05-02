@@ -51,15 +51,30 @@
                                    href="{{ route('admin.products.create') }}">{{trans('admin.products.fields.new')}}</a>
                             </div>
                             <form action="{{route('admin.products.index')}}" method="GET">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="query" placeholder="{{trans('admin.products.fields.search')}}"
-                                           value="{{ request()->input('query') }}">
-                                    <span class="text-danger">@error('query'){{ $message }} @enderror</span>
-                                    <button type="submit"
-                                            class="btn btn-primary inline-flex items-center bg-white leading-none text-black-600 rounded-full p-2 shadow text-teal text-sm">{{trans('Search')}}</button>
+                                <div class="flex items-center">
+                                    <div>
+                                                <span
+                                                    class="text-danger">@error('queryUser'){{ $message }} @enderror</span>
+                                        <input type="text" class="form-control rounded-full m-2" name="query"
+                                               value="{{ request()->input('queryUser') }}"
+                                               class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline"
+                                               type="text"
+                                               placeholder="{{trans('client.products.fields.search description')}}">
+                                    </div>
+                                    <div class="flex sm:flex-row">
+                                        <label
+                                            class="self-center">{{trans('client.products.fields.categories')}}</label>
+                                        <select class="m-3 rounded-full p-3" id="category_id" name="category_id">
+                                            <option value=''>Todas</option>
+                                            @foreach($categories as $category)
+                                                <option value="{{$category->id}}">{{$category->name}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
                                 </div>
+                                <button type="submit"
+                                        class="bg-gray-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-gray-600 mr-6">{{trans('client.products.fields.search')}}</button>
                             </form>
-
                         </div>
                         <div class="bg-white rounded-lg shadow-sm text-center flex flex-col">
                             <h1 class="bg-teal-500">{{trans('admin.products.titles.title')}}</h1>
@@ -100,7 +115,8 @@
                                                           method="POST" class="formEliminar">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit">{{trans('admin.products.fields.delete')}}</button>
+                                                        <button
+                                                            type="submit">{{trans('admin.products.fields.delete')}}</button>
                                                     </form>
 
                                                 </div>
@@ -110,7 +126,8 @@
                                                           method="POST">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit">{{trans('admin.products.fields.change status')}}</button>
+                                                        <button
+                                                            type="submit">{{trans('admin.products.fields.change status')}}</button>
                                                     </form>
                                                 </div>
                                                 <a href="{{ route('admin.products.show', $product) }}"

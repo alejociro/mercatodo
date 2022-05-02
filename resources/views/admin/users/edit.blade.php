@@ -52,7 +52,7 @@
                             <input type="password" id="password" name="password"
                                    class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"
                                    @class(['form-control', 'is-invalid' => $errors->has('password')]) value="{{ old('password') }}"
-                                   type="text" required/>
+                                   type="text" />
                             @error('password')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -62,7 +62,7 @@
                             <input type="password" id="confirm-password" name="confirm-password"
                                    class="leading-none text-gray-900 p-3 focus:outline-none focus:border-blue-700 mt-4 bg-gray-100 border rounded border-gray-200"
                                    @class(['form-control', 'is-invalid' => $errors->has('confirm-password')]) value="{{ old('confirm-password') }}"
-                                   type="text" required/>
+                                   type="text" />
                             @error('confirm-password')
                             <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

@@ -2,6 +2,8 @@
 
 namespace App\Jobs;
 
+use App\Models\User;
+use App\Notifications\ExportActionReady;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -16,23 +18,23 @@ class NotifyUserActionsExportReady implements ShouldQueue
     use Queueable;
     use SerializesModels;
 
+    protected User $user;
+    protected string $filePath;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($user, $filePath)
     {
-        //
+        $this->user = $user;
+        $this->filePath = $filePath;
     }
 
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle()
+    public function handle(): void
     {
-        //
+        $userNotify = $this->user;
+        $userNotify->notify(new ExportActionReady($this->filePath));
     }
 }

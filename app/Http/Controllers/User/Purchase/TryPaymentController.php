@@ -6,11 +6,12 @@ use App\Contracts\PaymentGatewayContract;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use App\Models\ShoppingCart;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class TryPaymentController extends Controller
 {
-    public function store(Request $request, PaymentGatewayContract $paymentGatewayContract, Payment $payment)
+    public function store(Request $request, PaymentGatewayContract $paymentGatewayContract, Payment $payment): RedirectResponse
     {
         $shoppingCart= ShoppingCart::find($payment->shopping_cart_id);
         $payment = $paymentGatewayContract->createSession($shoppingCart, $request);

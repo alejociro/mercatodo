@@ -9,7 +9,7 @@ class import
         return [
             'name' => ['required', 'min:5', 'max:100'],
             'price' => ['required','numeric', 'integer', 'min:1'],
-            'stock' => ['required','numeric', 'integer', 'min:0'],
+            'stock' => ['numeric', 'integer'],
             'description' => ['required', 'min:10', 'max:250'],
             'category_id' => ['numeric', 'integer', 'min:1'],
         ];

@@ -179,7 +179,7 @@ return [
         ],
         'titles' => [
             'index' => 'Acciones de adminsitración',
-            'actions' => 'Acciones'
+            'actions' => 'Reporte de Acciones'
         ],
     ],
 ];

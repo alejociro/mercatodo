@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Product;
 
 use App\Actions\Admin\DeleteModelAction;
+use App\Actions\Admin\Product\CategoryInCacheAction;
 use App\Actions\Admin\Product\StoreProductAction;
 use App\Actions\Admin\Product\UpdateProductAction;
 use App\Actions\Admin\StoreOrUpdateImage;
@@ -27,11 +28,12 @@ class ProductController extends Controller
         $this->middleware('permission:delete-product', ['only'=>['destroy']]);
     }
 
-    public function index(Request $request): View
+    public function index(Request $request, CategoryInCacheAction $categoryInCacheAction): View
     {
-        $products = FilterProduct::filter($request->input('query'))->select(['id','name','price','stock','category_id','disabled_at'])->paginate(5)->withQueryString();
+        $categories = $categoryInCacheAction->categoriesCache();
+        $products = FilterProduct::filter($request->query('query'), $request->query('category_id'))->select(['id','name','price','stock','category_id','disabled_at'])->paginate(5)->withQueryString();
         $currency = config('app.currency');
-        return view('admin.products.index', compact('products', 'currency'));
+        return view('admin.products.index', compact('categories', 'products', 'currency'));
     }
 
     public function create(): View

@@ -5,7 +5,7 @@
                 {{ trans('admin.actions.titles.index') }}
             </h2>
             <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <x-nav-link :href="route('admin.payment')" :active="request()->routeIs('admin.payment')">
+                <x-nav-link :href="route('admin.export.actions.form')" :active="request()->routeIs('admin.export.actions.form')">
                     {{ trans('admin.actions.titles.actions') }}
                 </x-nav-link>
             </div>

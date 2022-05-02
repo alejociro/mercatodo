@@ -25,29 +25,34 @@
                                     <span class="mx-1 text-sm">{{trans('client.products.fields.ubi')}}</span>
                                 </div>
                             </div>
-                            <nav :class="isOpen ? '' : 'hidden'" class="sm:flex sm:justify-center sm:items-center mt-4">
-                                <div class="flex flex-col sm:flex-row">
-                                    <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
-                                       href="#">{{trans('client.products.fields.categories')}}</a>
-                                </div>
-                            </nav>
+
                             <div class="relative mt-6 max-w-lg mx-auto">
-                                  <span class="absolute inset-y-0 left-0 pl-3 flex items-center">
-                                      <svg class="h-5 w-5 text-gray-500" viewBox="0 0 24 24" fill="none">
-                                      <path
-                                      d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z"
-                                      stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                      </svg>
-                                      </span>
-                                <form action="{{route('productos')}}" method="GET">
-                                    <span class="text-danger">@error('queryUser'){{ $message }} @enderror</span>
-                                    <input type="text" class="form-control" name="query"
-                                           value="{{ request()->input('queryUser') }}"
-                                           class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline"
-                                           type="text" placeholder="{{trans('client.products.fields.search description')}}">
-                                    <button type="submit"
-                                            class="bg-gray-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-gray-600 mr-6">{{trans('client.products.fields.search')}}</button>
-                                </form>
+                                <div>
+                                    <form action="{{route('productos')}}" method="GET">
+                                        <div class="flex items-center">
+                                            <div>
+                                                <span
+                                                    class="text-danger">@error('queryUser'){{ $message }} @enderror</span>
+                                                <input type="text" class="form-control rounded-full m-2" name="query"
+                                                       value="{{ request()->input('queryUser') }}"
+                                                       class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline"
+                                                       type="text"
+                                                       placeholder="{{trans('client.products.fields.search description')}}">
+                                            </div>
+                                            <div class="flex sm:flex-row">
+                                                <label class="self-center">{{trans('client.products.fields.categories')}}</label>
+                                                <select class="m-3 rounded-full p-3" id="category_id" name="category_id">
+                                                    <option value=''>Todas</option>
+                                                    @foreach($categories as $category)
+                                                        <option value="{{$category->id}}">{{$category->name}}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <button type="submit"
+                                                class="bg-gray-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-gray-600 mr-6">{{trans('client.products.fields.search')}}</button>
+                                    </form>
+                                </div>
                             </div>
                         </div>
 

@@ -7,7 +7,7 @@ use Illuminate\Support\Carbon;
 
 class ChangeProductStatusAction
 {
-    public function execute(Product $product)
+    public function execute(Product $product): void
     {
         if ($product->disabled_at == null) {
             $product->disabled_at = Carbon::now();

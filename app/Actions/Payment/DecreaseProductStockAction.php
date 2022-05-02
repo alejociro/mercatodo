@@ -10,7 +10,7 @@ use App\Notifications\PaymentNotification;
 
 class DecreaseProductStockAction
 {
-    public static function execute(Payment $payment)
+    public static function execute(Payment $payment): void
     {
         $idCart = $payment->shopping_cart_id;
         $shoppingCart = ShoppingCart::find($idCart);

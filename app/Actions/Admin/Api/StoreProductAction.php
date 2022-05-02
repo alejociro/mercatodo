@@ -6,7 +6,7 @@ use App\Models\Product;
 
 class StoreProductAction
 {
-    public function execute(array $data, Product $product)
+    public function execute(array $data, Product $product): Product
     {
         $product->name = $data['name'];
         $product->image = $data['image'];

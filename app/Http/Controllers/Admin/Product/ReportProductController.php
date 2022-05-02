@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ReportProductController extends Controller
 {
@@ -12,7 +13,7 @@ class ReportProductController extends Controller
         $this->middleware('permission:see-product', ['only'=>['reportProductSold']]);
     }
 
-    public function reportProductsSold()
+    public function reportProductsSold(): View
     {
         return view('admin.products.solds');
     }
