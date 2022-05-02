@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Product;
 
 use App\Actions\Admin\DeleteModelAction;
+use App\Actions\Admin\Product\CategoryInCacheAction;
+use App\Actions\Admin\Product\DeleteCategoryCache;
 use App\Actions\Admin\Product\StoreCategoryAction;
 use App\Actions\Admin\Product\UpdateCategoryAction;
 use App\Http\Controllers\Controller;
@@ -11,6 +13,7 @@ use App\Http\Requests\Admin\Categories\UpdateCategoryRequest;
 use App\Models\Category;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\View\View;
 
 class CategoryController extends Controller
@@ -23,9 +26,9 @@ class CategoryController extends Controller
         $this->middleware('permission:delete-category',['only'=>['destroy']]);
     }
 
-    public function index(): View
+    public function index(CategoryInCacheAction $action): View
     {
-        $categories = Category::orderby('name')->paginate(5);
+        $categories = $action->categoriesCache();
         return view('admin.category.index', compact('categories'));
     }
 
@@ -34,9 +37,10 @@ class CategoryController extends Controller
         return view('admin.category.create');
     }
 
-    public function store(StoreCategoryRequest $request, StoreCategoryAction $storeCategoryAction): RedirectResponse
+    public function store(StoreCategoryRequest $request, StoreCategoryAction $storeCategoryAction, DeleteCategoryCache $deleteCategoryCache): RedirectResponse
     {
         $storeCategoryAction->execute($request->validated(), new Category());
+        $deleteCategoryCache->execute();
         return redirect()->route('admin.categories.index');
     }
 
@@ -45,15 +49,17 @@ class CategoryController extends Controller
         return view('admin.category.edit', compact('category'));
     }
 
-    public function update(UpdateCategoryRequest $request,UpdateCategoryAction $updateCategoryAction ,Category $category): RedirectResponse
+    public function update(UpdateCategoryRequest $request,UpdateCategoryAction $updateCategoryAction ,Category $category, DeleteCategoryCache $deleteCategoryCache): RedirectResponse
     {
         $updateCategoryAction->execute($request->validated(), $category);
+        $deleteCategoryCache->execute();
         return redirect()->route('admin.categories.index');
     }
 
-    public function destroy(Category $category, DeleteModelAction $deleteModelAction): RedirectResponse
+    public function destroy(Category $category, DeleteModelAction $deleteModelAction, DeleteCategoryCache $deleteCategoryCache): RedirectResponse
     {
         $deleteModelAction->execute($category);
+        $deleteCategoryCache->execute();
         return redirect()->route('admin.categories.index' );
     }
 }

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin\User;
 
+use App\Actions\Admin\User\EditRolAction;
+use App\Actions\Admin\User\StoreRolAction;
+use App\Actions\Admin\User\UpdateRolAction;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Roles\StoreRolRequest;
 use App\Http\Requests\Admin\Roles\UpdateRolRequest;
@@ -38,34 +41,28 @@ class RolController extends Controller
         return view('admin.roles.create', compact('permission'));
     }
 
-    public function store(StoreRolRequest $request): RedirectResponse
+    public function store(StoreRolRequest $request, StoreRolAction $storeRolAction): RedirectResponse
     {
-        $role = Role::create(['name'=>$request->input('name')]);
-        $role->syncPermissions($request->input('permission'));
+        $storeRolAction->execute($request->input('name'), $request->input('permission'));
         return redirect()->route('admin.roles.index');
     }
 
-    public function edit($id): View
+    public function edit($id, EditRolAction $editRolAction): View
     {
-        $role = Role::find($id);
-        $permission = Permission::get();
-        $rolePermissions = DB::table('role_has_permissions')->where('role_has_permissions.role_id',$id)
-            ->pluck('role_has_permissions.permission_id','role_has_permissions.permission_id')
-            ->all();
-        return view('admin.roles.edit', compact('role','permission','rolePermissions'));
+        $arr = $editRolAction->execute($id);
+        return view('admin.roles.edit', compact('arr'));
     }
 
-    public function update(UpdateRolRequest $request, Role $role): RedirectResponse
+    public function update(UpdateRolRequest $request, Role $role,UpdateRolAction $updateRolAction): RedirectResponse
     {
-        $role->name = $request->input('name');
-        $role->save();
-        $role->syncPermissions($request->input('permission'));
+        $updateRolAction->execute($role,$request->input('name'), $request->input('permission'));
         return redirect()->route('admin.roles.index');
     }
 
-    public function destroy($id): RedirectResponse
+    public function destroy(Role $role): RedirectResponse
     {
-        DB::table('roles')->where('id', $id)->delete();
+        $role->delete();
+        Cache::forget('roles');
         return redirect()->route('admin.roles.index');
     }
 }

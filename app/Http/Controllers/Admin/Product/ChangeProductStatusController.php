@@ -11,9 +11,14 @@ use Carbon\Carbon;
 
 class ChangeProductStatusController extends Controller
 {
+    function __construct()
+    {
+        $this->middleware('permission:create-product|edit-product|delete-product', ['only'=>['update']]);
+    }
+
     public function update(Product $product, ChangeProductStatusAction $changeProductStatusAction): RedirectResponse
     {
         $changeProductStatusAction->execute($product);
-        return redirect()->route('admin.products.index');
+        return redirect()->route('products.index');
     }
 }
