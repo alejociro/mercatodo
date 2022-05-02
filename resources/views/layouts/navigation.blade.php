@@ -18,21 +18,21 @@
                 </div>
                 @can('see-user')
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                        <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.index')">
                             {{ trans('Users') }}
                         </x-nav-link>
                     </div>
                 @endif
                 @can('see-rol')
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('roles.index')" :active="request()->routeIs('roles.index')">
+                        <x-nav-link :href="route('admin.roles.index')" :active="request()->routeIs('admin.roles.index')">
                             {{ trans('Roles') }}
                         </x-nav-link>
                     </div>
                 @endcan
                 @can('see-product')
                     <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                        <x-nav-link :href="route('products.index')" :active="request()->routeIs('products.index')">
+                        <x-nav-link :href="route('admin.products.index')" :active="request()->routeIs('admin.products.index')">
                             {{ trans('Products') }}
                         </x-nav-link>
                     </div>
