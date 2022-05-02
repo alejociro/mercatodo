@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User\Purchase;
 
+use App\Actions\User\Payments\PaymentIndexUserAction;
 use App\Contracts\PaymentGatewayContract;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
@@ -11,17 +12,9 @@ use Illuminate\View\View;
 
 class PaymentController extends Controller
 {
-    public function index(PaymentGatewayContract $paymentGatewayContract)
+    public function index(PaymentGatewayContract $paymentGatewayContract, PaymentIndexUserAction $paymentIndexUserAction)
     {
-        $userNow = auth()->user()->id;
-        $payments = Payment::where('user_id', $userNow)->paginate(10);
-        foreach ($payments as $payment)
-            {
-                if($payment->status == 'pending')
-                {
-                    $paymentGatewayContract->queryPayment($payment);
-                }
-            }
+        $payments = $paymentIndexUserAction->execute($paymentGatewayContract);
         return view('client.payment.index', compact('payments'));
     }
 
@@ -36,13 +29,8 @@ class PaymentController extends Controller
     public function show(Payment $payment): View
     {
         $currency = config('app.currency');
-        $idCart = $payment->shopping_cart_id;
-        $shoppingCart = ShoppingCart::find($idCart);
+        $shoppingCart = ShoppingCart::find($payment->shopping_cart_id);
         return view('client.payment.show',compact('payment', 'shoppingCart','currency'));
     }
 
-    public function update(Request $request, $id)
-    {
-        //
-    }
 }
