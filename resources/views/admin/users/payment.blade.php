@@ -1,8 +1,30 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ trans('Payments') }}
-        </h2>
+        <div class="flex">
+            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+                {{ trans('admin.users.titles.payments') }}
+            </h2>
+            <div class="px-4">
+                <form action="{{route('admin.export.payments.form')}}" method="GET">
+                    <div class='flex px-4 items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
+                        <button type="submit"
+                                class='w-auto bg-gradient-to-b from-teal-800 to-teal-400 rounded-lg shadow-xl font-medium text-white px-4 py-2'>
+                            {{ trans('admin.users.fields.exports') }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+            <div class="px-4">
+                <form action="{{route('admin.report.payments')}}" method="GET">
+                    <div class='flex px-4 items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
+                        <button type="submit"
+                                class='w-auto bg-gradient-to-b from-blue-800 to-blue-400 rounded-lg shadow-xl font-medium text-white px-4 py-2'>
+                            {{ trans('admin.users.fields.reports') }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
     </x-slot>
 
     <div class="py-12">
@@ -14,12 +36,12 @@
                             <h1 class="bg-teal-500">{{trans('Table of payments')}}</h1>
                             <table>
                                 <thead>
-                                <th>{{trans('Request')}}</th>
-                                <th>{{trans('Value')}}</th>
-                                <th>{{trans('Payer document')}}</th>
-                                <th>{{trans('Status')}}</th>
-                                <th>{{trans('Paid at')}}</th>
-                                <th>{{trans('Actions')}}</th>
+                                <th>{{trans('admin.users.fields.request')}}</th>
+                                <th>{{trans('admin.users.fields.value')}}</th>
+                                <th>{{trans('admin.users.fields.payer document')}}</th>
+                                <th>{{trans('admin.users.fields.status')}}</th>
+                                <th>{{trans('admin.users.fields.paid at')}}</th>
+                                <th>{{trans('admin.users.fields.actions')}}</th>
                                 </thead>
                                 <tbody>
                                 @foreach ($payments as $payment)
@@ -33,8 +55,9 @@
                                             @if($payment->status === 'successful')
                                                 <div class="inline-flex p-2">
                                                     <a href="{{ route('payments.show', $payment) }}"
-                                                       class="inline-flex items-center bg-white leading-none text-green-600 rounded-full p-2 shadow text-teal text-sm">Ver
-                                                        factura</a>
+                                                       class="inline-flex items-center bg-white leading-none text-green-600 rounded-full p-2 shadow text-teal text-sm">
+                                                        {{trans('admin.users.fields.see payment')}}
+                                                    </a>
                                                 </div>
                                             @endif
                                         </td>
