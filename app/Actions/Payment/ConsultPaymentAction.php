@@ -8,7 +8,7 @@ use Illuminate\Support\Carbon;
 
 class ConsultPaymentAction
 {
-    public static function consult($response, Payment $payment)
+    public static function consult($response, Payment $payment): void
     {
         if ($response->isSuccessful()) {
             if ($response->status()->isApproved()) {

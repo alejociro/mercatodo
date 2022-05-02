@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Api\Products;
 use App\Http\Controllers\Controller;
 use App\Models\Payment;
 use App\Models\ProductSold;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 
 class MetricsController extends Controller
 {
-    public function chart()
+    public function chart(): JsonResponse
     {
         $values = ProductSold::select('name', DB::raw('count(*) as total'))->groupBy('name')
             ->get()
@@ -22,7 +23,7 @@ class MetricsController extends Controller
         ]);
     }
 
-    public function barChart()
+    public function barChart(): JsonResponse
     {
         $values = Payment::select('status', DB::raw('count(*) as total'))->groupBy('status')
             ->get()

@@ -7,7 +7,7 @@ use Illuminate\Support\Carbon;
 
 class ChangeUserStatusAction
 {
-    public function execute(User $user)
+    public function execute(User $user): void
     {
         if ($user->disabled_at == null) {
             $user->disabled_at = Carbon::now();

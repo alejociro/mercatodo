@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 
 class UpdateUserAction
 {
-    public function execute(array $data, User $user)
+    public function execute(array $data, User $user): void
     {
         $user->name = $data['name'];
         $user->surname = $data['surname'];

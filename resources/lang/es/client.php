@@ -4,7 +4,7 @@ return [
   'welcome' => [
         'fields' => [
             'login' => 'Iniciar sesión',
-            'register' => 'Registrare!!',
+            'register' => 'Registrate!!',
             'dashboard' => 'Inicio',
             'mercatodo' => 'MERCATODO',
             'categories' => 'Categorias',

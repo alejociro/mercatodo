@@ -4,12 +4,14 @@ namespace App\Imports;
 
 use App\Models\Product;
 use App\Rules\Product\import;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithUpserts;
 use Maatwebsite\Excel\Concerns\WithValidation;
 
-class ProductsImport implements ToModel, WithHeadingRow, WithValidation, WithUpserts
+class ProductsImport implements ToModel, WithHeadingRow, WithValidation, WithUpserts, ShouldQueue, WithChunkReading
 {
     public function model(array $row)
     {
@@ -31,5 +33,10 @@ class ProductsImport implements ToModel, WithHeadingRow, WithValidation, WithUps
     public function uniqueBy()
     {
         return 'name';
+    }
+
+    public function chunkSize(): int
+    {
+        return 2000;
     }
 }

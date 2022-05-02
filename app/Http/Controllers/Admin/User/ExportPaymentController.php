@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ExportPaymentController extends Controller
 {
@@ -23,7 +24,7 @@ class ExportPaymentController extends Controller
         return view('admin.users.exportPayments', compact('fechaNow'));
     }
 
-    public function export(Request $request)
+    public function export(Request $request): BinaryFileResponse
     {
         ActionAdmin::dispatch(auth()->user(), 'Exporte de pagos');
         return Excel::download((new PaymentsExport())

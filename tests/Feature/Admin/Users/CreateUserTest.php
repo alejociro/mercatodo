@@ -22,5 +22,4 @@ class CreateUserTest extends TestCase
         $response = $this->actingAs($user)->get(route('admin.users.create'));
         $response->assertStatus(200);
     }
-
 }
