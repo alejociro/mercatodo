@@ -1,14 +1,41 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="flex">
-            <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-                {{ trans('Products') }}
+            <h2 class="font-semibold text-xl mx-8 text-gray-800 leading-tight">
+                {{ trans('admin.products.titles.title') }}
             </h2>
-            <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
-                    {{ trans('Categories') }}
-                </x-nav-link>
-            </div>
+            <form action="{{route('admin.categories.index')}}" method="GET">
+                <div class='flex px-4 items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
+                    <button type="submit"
+                            class='w-auto bg-gradient-to-b from-slate-800 to-slate-400 rounded-lg shadow-xl font-medium text-white px-4 py-2'>
+                        {{trans('admin.products.fields.category')}}
+                    </button>
+                </div>
+            </form>
+            <form action="{{route('admin.export.products.form')}}" method="GET">
+                <div class='flex px-4 items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
+                    <button type="submit"
+                            class='w-auto bg-gradient-to-b from-teal-800 to-teal-400 rounded-lg shadow-xl font-medium text-white px-4 py-2'>
+                        {{{trans('admin.products.fields.export')}}}
+                    </button>
+                </div>
+            </form>
+            <form action="{{route('admin.import.products.form')}}" method="GET">
+                <div class='flex px-4 items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
+                    <button type="submit"
+                            class='w-auto bg-gradient-to-b from-blue-800 to-blue-400 rounded-lg shadow-xl font-medium text-white px-4 py-2'>
+                        {{trans('admin.products.fields.import')}}
+                    </button>
+                </div>
+            </form>
+            <form action="{{route('admin.report.products')}}" method="GET">
+                <div class='flex px-4 items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
+                    <button type="submit"
+                            class='w-auto bg-gradient-to-b from-purple-800 to-purple-400 rounded-lg shadow-xl font-medium text-white px-4 py-2'>
+                        {{trans('admin.products.fields.top')}}
+                    </button>
+                </div>
+            </form>
         </div>
 
     </x-slot>
@@ -21,11 +48,11 @@
                         <div class="p-6 inline-flex">
                             <div class="inline-flex  bg-white p-2 ">
                                 <a class="inline-flex bg-indigo-200 text-black rounded-full h-6 px-3 justify-center items-center"
-                                   href="{{ route('products.create') }}">{{trans('New')}}</a>
+                                   href="{{ route('admin.products.create') }}">{{trans('admin.products.fields.new')}}</a>
                             </div>
-                            <form action="{{route('products.index')}}" method="GET">
+                            <form action="{{route('admin.products.index')}}" method="GET">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" name="query" placeholder="Search here....."
+                                    <input type="text" class="form-control" name="query" placeholder="{{trans('admin.products.fields.search')}}"
                                            value="{{ request()->input('query') }}">
                                     <span class="text-danger">@error('query'){{ $message }} @enderror</span>
                                     <button type="submit"
@@ -35,18 +62,18 @@
 
                         </div>
                         <div class="bg-white rounded-lg shadow-sm text-center flex flex-col">
-                            <h1 class="bg-teal-500">{{trans('Table of products')}}</h1>
+                            <h1 class="bg-teal-500">{{trans('admin.products.titles.title')}}</h1>
 
 
                             <table>
                                 <thead>
                                 <th>ID</th>
-                                <th>{{trans('Name')}}</th>
-                                <th>{{trans('Value')}}</th>
-                                <th>{{trans('Stock')}}</th>
-                                <th>{{trans('Category')}}</th>
-                                <th>{{trans('Status')}}</th>
-                                <th>{{trans('Actions')}}</th>
+                                <th>{{trans('admin.products.fields.name')}}</th>
+                                <th>{{trans('admin.products.fields.value')}}</th>
+                                <th>{{trans('admin.products.fields.stock')}}</th>
+                                <th>{{trans('admin.products.fields.category')}}</th>
+                                <th>{{trans('admin.products.fields.status')}}</th>
+                                <th>{{trans('admin.products.fields.actions')}}</th>
                                 </thead>
                                 <tbody>
                                 @foreach ($products as $product)
@@ -65,33 +92,30 @@
                                         </td>
                                         <td>
                                             <div class="inline-flex p-2">
-                                                <!-- botón editar -->
-                                                <a href="{{ route('products.edit', $product->id) }}"
-                                                   class="inline-flex items-center bg-white leading-none text-green-600 rounded-full p-2 shadow text-teal text-sm">Editar</a>
-
-                                                <!-- botón borrar -->
+                                                <a href="{{ route('admin.products.edit', $product->id) }}"
+                                                   class="inline-flex items-center bg-white leading-none text-green-600 rounded-full p-2 shadow text-teal text-sm">{{trans('admin.products.fields.edit')}}</a>
                                                 <div
                                                     class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">
-                                                    <form action="{{ route('products.destroy', $product) }}"
+                                                    <form action="{{ route('admin.products.destroy', $product) }}"
                                                           method="POST" class="formEliminar">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit">Borrar</button>
+                                                        <button type="submit">{{trans('admin.products.fields.delete')}}</button>
                                                     </form>
 
                                                 </div>
                                                 <div
                                                     class="inline-flex items-center bg-white leading-none text-black-600 rounded-full p-2 shadow text-teal text-sm">
-                                                    <form action="{{ route('changeProductStatus', $product->id) }}"
+                                                    <form action="{{ route('admin.change.product.status', $product) }}"
                                                           method="POST">
                                                         @csrf
                                                         @method('PUT')
-                                                        <button type="submit">{{trans('Change status')}}</button>
+                                                        <button type="submit">{{trans('admin.products.fields.change status')}}</button>
                                                     </form>
                                                 </div>
-                                                <a href="{{ route('products.show', $product) }}"
-                                                   class="inline-flex items-center bg-white leading-none text-green-600 rounded-full p-2 shadow text-teal text-sm">Ver
-                                                    producto</a>
+                                                <a href="{{ route('admin.products.show', $product) }}"
+                                                   class="inline-flex items-center bg-white leading-none text-green-600 rounded-full p-2 shadow text-teal text-sm">
+                                                    {{trans('admin.products.fields.show')}}</a>
                                             </div>
                                         </td>
                                     </tr>

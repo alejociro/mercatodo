@@ -9,8 +9,8 @@
         <div class="bg-gradient-to-b from-teal-800 to-teal-400 h-96"></div>
         <div class="max-w-5xl mx-auto px-6 sm:px-6 lg:px-8 mb-12">
             <div class="bg-white w-full shadow rounded p-8 sm:p-12 -mt-72">
-                <p class="text-3xl font-bold leading-7 text-center">Editar un producto</p>
-                <form action="{{route('products.update', $product)}}" method="POST">
+                <p class="text-3xl font-bold leading-7 text-center">{{ trans('admin.products.titles.edit a product') }}</p>
+                <form action="{{route('admin.products.update', $product)}}" method="POST">
                     @csrf
                     @method('PATCH')
                     <div class="md:flex items-center mt-12">
@@ -47,9 +47,9 @@
                             @enderror
                         </div>
                         <div class="w-full md:w-1/2 flex flex-col md:ml-6 md:mt-0 mt-4">
-                            <label class="font-semibold leading-none" for="category_id">{{trans('Category')}}</label>
-                            <select class="form-control" name="category_id" id="category_id">
-                                <option disabled selected>{{trans('Select a category')}}</option>
+                            <label class="font-semibold m-2 leading-none" for="category_id">{{trans('admin.products.fields.select category')}}</label>
+                            <select class="form-control m-2 rounded-full" name="category_id" id="category_id">
+                                <option disabled selected>{{trans('admin.products.fields.select category')}}</option>
                                 @foreach ($categories as $category)
                                     <option value="{{$category->id}}">{{$category->name}}</option>
                                 @endforeach
@@ -94,7 +94,7 @@
                     </div>
 
                     <div class='flex items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
-                        <a href="{{ route('products.index') }}"
+                        <a href="{{ route('admin.products.index') }}"
                            class='w-auto bg-gray-500 hover:bg-gray-700 rounded-lg shadow-xl font-medium text-white px-4 py-2'>{{trans('admin.products.fields.cancel')}}</a>
                         <button type="submit"
                                 class='w-auto bg-gradient-to-b from-teal-800 to-teal-400 rounded-lg shadow-xl font-medium text-white px-4 py-2'>{{trans('admin.products.fields.save')}}</button>
