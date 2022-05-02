@@ -19,6 +19,6 @@ class ChangeProductStatusController extends Controller
     public function update(Product $product, ChangeProductStatusAction $changeProductStatusAction): RedirectResponse
     {
         $changeProductStatusAction->execute($product);
-        return redirect()->route('products.index');
+        return redirect()->route('admin.products.index');
     }
 }

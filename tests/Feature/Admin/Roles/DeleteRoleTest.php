@@ -26,7 +26,7 @@ class DeleteRoleTest extends TestCase
 
         $user = User::factory()->create()->givePermissionTo('delete-rol');
 
-        $response = $this->actingAs($user)->delete("/roles/{$role->id}");
+        $response = $this->actingAs($user)->delete("/admin/roles/{$role->id}");
         $response->assertRedirect();
     }
 }

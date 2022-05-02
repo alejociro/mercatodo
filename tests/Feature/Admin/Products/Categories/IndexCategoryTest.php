@@ -15,7 +15,7 @@ class IndexCategoryTest extends TestCase
     {
         Permission::create(['name' => 'see-category']);
         $user = User::factory()->create()->givePermissionTo('see-category');
-        $response = $this->actingAs($user)->get(route('categories.index'));
+        $response = $this->actingAs($user)->get(route('admin.categories.index'));
         $response->assertStatus(200);
         $response->assertViewIs('admin.category.index');
         $response->assertViewHas('categories');

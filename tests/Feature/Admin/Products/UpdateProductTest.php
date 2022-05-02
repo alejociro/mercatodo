@@ -30,7 +30,7 @@ class UpdateProductTest extends TestCase
         $product = Product::factory()->create();
         $user = User::factory()->create()->givePermissionTo('edit-product');
 
-        $response = $this->actingAs($user)->patch(route('products.update', $product), $request);
+        $response = $this->actingAs($user)->patch(route('admin.products.update', $product), $request);
         $response->assertRedirect();
 
         $product = $product->refresh();
@@ -47,7 +47,7 @@ class UpdateProductTest extends TestCase
         $product = Product::factory()->create();
         $user = User::factory()->create()->givePermissionTo('edit-product');
 
-        $response = $this->actingAs($user)->patch(route('products.update', $product), $request);
+        $response = $this->actingAs($user)->patch(route('admin.products.update', $product), $request);
         $response->assertRedirect();
 
         $product = $product->refresh();

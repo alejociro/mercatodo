@@ -21,7 +21,7 @@ class DeleteProductTest extends TestCase
     {
         $data = Product::factory()->create();
         $user = User::factory()->create()->givePermissionTo('delete-product');
-        $response = $this->actingAs($user)->delete("/products/{$data->id}");
+        $response = $this->actingAs($user)->delete("/admin/products/{$data->id}");
         $response->assertRedirect();
     }
 }

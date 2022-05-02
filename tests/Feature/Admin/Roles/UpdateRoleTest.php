@@ -32,7 +32,7 @@ class UpdateRoleTest extends TestCase
 
         $user = User::factory()->create()->givePermissionTo('edit-rol');
 
-        $response = $this->actingAs($user)->patch(route('roles.update', $role->id), $request);
+        $response = $this->actingAs($user)->patch(route('admin.roles.update', $role->id), $request);
         $response->assertRedirect();
 
         $role = $role->refresh();

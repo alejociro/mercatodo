@@ -20,7 +20,7 @@ class IndexUserTest extends TestCase
     public function test_it_can_list_users(): void
     {
         $user = User::factory()->create()->givePermissionTo('see-user');
-        $response = $this->actingAs($user)->get(route('users.index'));
+        $response = $this->actingAs($user)->get(route('admin.users.index'));
         $response->assertStatus(200);
         $response->assertViewIs('admin.users.index');
         $response->assertViewHas('users');
@@ -29,7 +29,7 @@ class IndexUserTest extends TestCase
     public function test_it_user_doesnt_permissions_cant_list_users(): void
     {
         $user2 = User::factory()->create();
-        $response = $this->actingAs($user2)->get(route('users.index'));
+        $response = $this->actingAs($user2)->get(route('admin.users.index'));
         $response->assertForbidden();
     }
 }

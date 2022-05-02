@@ -15,7 +15,7 @@ class CreateCategoryTest extends TestCase
     {
         Permission::create(['name' => 'create-category']);
         $user = User::factory()->create()->givePermissionTo('create-category');
-        $response = $this->actingAs($user)->get(route('categories.create'));
+        $response = $this->actingAs($user)->get(route('admin.categories.create'));
         $response->assertStatus(200);
     }
 }

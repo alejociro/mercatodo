@@ -22,7 +22,7 @@ class ChangeProductStatusTest extends TestCase
     {
         $product = Product::factory()->create();
         $user = User::factory()->create()->givePermissionTo('edit-product');
-        $response = $this->actingAs($user)->put(route('changeProductStatus', $product->id));
+        $response = $this->actingAs($user)->put(route('admin.change.product.status', $product->id));
         $response->assertRedirect();
 
         $product = $product->refresh();
@@ -33,8 +33,8 @@ class ChangeProductStatusTest extends TestCase
     {
         $product = Product::factory()->create();
         $user = User::factory()->create()->givePermissionTo('edit-product');
-        $this->actingAs($user)->put(route('changeProductStatus', $product->id));
-        $response = $this->actingAs($user)->put(route('changeProductStatus', $product->id));
+        $this->actingAs($user)->put(route('admin.change.product.status', $product));
+        $response = $this->actingAs($user)->put(route('admin.change.product.status', $product));
         $response->assertRedirect();
 
         $product = $product->refresh();

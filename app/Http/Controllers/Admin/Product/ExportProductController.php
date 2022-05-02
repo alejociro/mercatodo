@@ -25,7 +25,7 @@ class ExportProductController extends Controller
         return view('admin.products.export', compact('categories'));
     }
 
-    public function export(Request $request, ExportProductAction $exportProductAction)
+    public function export(Request $request, ExportProductAction $exportProductAction): View
     {
         $categories = $exportProductAction->execute($request->query('stock'), $request->query('prices'), $request->query('category'));
         return view('admin.products.export', compact('categories'));

@@ -19,7 +19,7 @@ class DeleteUserTest extends TestCase
     {
         $user2 = User::factory()->create();
         $user = User::factory()->create()->givePermissionTo('delete-user');
-        $response = $this->actingAs($user)->delete("/users/{$user2->id}");
+        $response = $this->actingAs($user)->delete("/admin/users/{$user2->id}");
         $response->assertRedirect();
     }
 }

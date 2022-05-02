@@ -19,7 +19,7 @@ class IndexRoleTest extends TestCase
     public function test_it_can_list_roles(): void
     {
         $user = User::factory()->create()->givePermissionTo('see-rol');
-        $response = $this->actingAs($user)->get(route('roles.index'));
+        $response = $this->actingAs($user)->get(route('admin.roles.index'));
         $response->assertStatus(200);
         $response->assertViewIs('admin.roles.index');
         $response->assertViewHas('roles');
@@ -28,7 +28,7 @@ class IndexRoleTest extends TestCase
     public function test_it_user_doesnt_permissions_cant_list_users(): void
     {
         $user2 = User::factory()->create();
-        $response = $this->actingAs($user2)->get(route('roles.index'));
+        $response = $this->actingAs($user2)->get(route('admin.roles.index'));
         $response->assertForbidden();
     }
 }
