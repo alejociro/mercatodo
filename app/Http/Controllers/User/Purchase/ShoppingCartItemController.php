@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\User\Purchase;
 
+use App\Actions\Admin\DeleteModelAction;
+use App\Actions\User\ShoppingCart\StoreItemInCartAction;
+use App\Actions\User\ShoppingCart\UpdateItemInCartAction;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ShoppingCart;
@@ -12,34 +15,9 @@ use Illuminate\View\View;
 
 class ShoppingCartItemController extends Controller
 {
-    public function store(Request $request, ShoppingCart $shoppingCart, Product $product): RedirectResponse
+    public function store(Request $request, ShoppingCart $shoppingCart, Product $product, StoreItemInCartAction $storeItemInCartAction): RedirectResponse
     {
-        $shoppingCartItem= auth()->user()->shoppingCartUser()->shoppingCartItems;
-        $itemSelected = 0;
-        $totalQuantity = 0 ;
-        foreach($shoppingCartItem as $item){
-            if($item->product_id == $product->id ){
-                $itemSelected = $item;
-                $totalQuantity = ($item->quantity) + ($request->input('quantity'));
-            }
-        }
-        if($totalQuantity <= $product->stock and $totalQuantity != 0){
-            $data = (['amount' => $totalQuantity]);
-            $itemSelected->update($data);
-            return redirect()->route('shoppingCartUser');
-        }elseif ($totalQuantity > $product->stock){
-            return redirect()->route('shoppingCartUser');
-        }
-        if($request->input('quantity') <= $product->stock){
-            $shoppingCart->shoppingCartItems()->create([
-                'product_id' => $product->getKey(),
-                'quantity' => $request->input('quantity'),
-                'total' => $product->price
-            ]);
-            return redirect()->route('productos');
-        } else {
-            return redirect()->route('productosr');
-        }
+        return $storeItemInCartAction->execute($request->all(), $shoppingCart,$product);
     }
 
     public function show(Product $product): View
@@ -48,28 +26,14 @@ class ShoppingCartItemController extends Controller
         return view('admin.products.show', compact('product','currency'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(Request $request, Product $product, UpdateItemInCartAction $updateItemInCartAction): RedirectResponse
     {
-        $shoppingCartItem= auth()->user()->shoppingCartUser()->shoppingCartItems;
-        $totalQuantity = $request->input('quantity');
-        foreach ($shoppingCartItem as $item){
-            if ($item->product_id == $product->id){
-                $itemSelected = $item;
-                if ($totalQuantity > $product->stock){
-                    return redirect()->route('shoppingCartUser');
-                }else{
-                    $data=(['quantity'=>$totalQuantity]);
-                    $itemSelected->update($data);
-                    return redirect()->route('shoppingCartUser');
-                }
-            }
-        }
+        return $updateItemInCartAction->execute($request->all(), $product);
     }
 
-    public function destroy($id): RedirectResponse
+    public function destroy(ShoppingCartItem $shoppingCartItem, DeleteModelAction $deleteModelAction): RedirectResponse
     {
-        $itemShoppingCart = ShoppingCartItem::find($id);
-        $itemShoppingCart->delete();
+        $deleteModelAction->execute($shoppingCartItem);
         return redirect()->route('shoppingCartUser');
     }
 }
