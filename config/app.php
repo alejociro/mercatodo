@@ -235,6 +235,7 @@ return [
 
     ],
 
-    'currency'=>env('CURRENCY', 'USD')
+    'currency' => env('CURRENCY', 'USD'),
+    'emailAdmin' => env('EMAIL', 'administrador@mercatodo.com'),
 
 ];
