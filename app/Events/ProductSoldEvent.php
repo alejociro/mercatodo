@@ -13,7 +13,9 @@ use Illuminate\Queue\SerializesModels;
 
 class ProductSoldEvent
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public Product $product;
     public string $name;

@@ -9,7 +9,7 @@ class CategoryInCacheAction
 {
     public function categoriesCache()
     {
-       Return Cache::rememberForever('categories', function (){
+        return Cache::rememberForever('categories', function () {
             return Category::orderBy('name')->get();
         });
     }

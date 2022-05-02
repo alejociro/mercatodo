@@ -6,11 +6,11 @@ class StoreFormatImage
 {
     public function saveImage($image): array
     {
-            $routeSaveImg = 'image/';
-            $imageProduct = date('YmdHis'). "." . $image->getClientOriginalExtension();
-            $image->move($routeSaveImg, $imageProduct);
-            $data['image'] = "$imageProduct";
+        $routeSaveImg = 'image/';
+        $imageProduct = date('YmdHis'). "." . $image->getClientOriginalExtension();
+        $image->move($routeSaveImg, $imageProduct);
+        $data['image'] = "$imageProduct";
 
-            return $data;
+        return $data;
     }
 }

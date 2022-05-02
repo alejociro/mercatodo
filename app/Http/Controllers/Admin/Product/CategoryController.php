@@ -18,12 +18,12 @@ use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:see-category|create-category|edit-category|delete-category', ['only'=>['index']]);
         $this->middleware('permission:create-category', ['only'=>['create','store']]);
         $this->middleware('permission:edit-category', ['only'=>['edit','update']]);
-        $this->middleware('permission:delete-category',['only'=>['destroy']]);
+        $this->middleware('permission:delete-category', ['only'=>['destroy']]);
     }
 
     public function index(CategoryInCacheAction $action): View
@@ -49,7 +49,7 @@ class CategoryController extends Controller
         return view('admin.category.edit', compact('category'));
     }
 
-    public function update(UpdateCategoryRequest $request,UpdateCategoryAction $updateCategoryAction ,Category $category, DeleteCategoryCache $deleteCategoryCache): RedirectResponse
+    public function update(UpdateCategoryRequest $request, UpdateCategoryAction $updateCategoryAction, Category $category, DeleteCategoryCache $deleteCategoryCache): RedirectResponse
     {
         $updateCategoryAction->execute($request->validated(), $category);
         $deleteCategoryCache->execute();
@@ -60,6 +60,6 @@ class CategoryController extends Controller
     {
         $deleteModelAction->execute($category);
         $deleteCategoryCache->execute();
-        return redirect()->route('admin.categories.index' );
+        return redirect()->route('admin.categories.index');
     }
 }

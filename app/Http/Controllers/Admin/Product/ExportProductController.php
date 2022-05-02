@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ExportProductController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:see-product', ['only'=>['productFormExport','export']]);
     }
@@ -27,7 +27,7 @@ class ExportProductController extends Controller
 
     public function export(Request $request, ExportProductAction $exportProductAction)
     {
-        $categories = $exportProductAction->execute($request->query('stock'),$request->query('prices'),$request->query('category'));
+        $categories = $exportProductAction->execute($request->query('stock'), $request->query('prices'), $request->query('category'));
         return view('admin.products.export', compact('categories'));
     }
 }

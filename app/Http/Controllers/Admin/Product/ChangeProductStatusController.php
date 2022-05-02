@@ -11,7 +11,7 @@ use Carbon\Carbon;
 
 class ChangeProductStatusController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:create-product|edit-product|delete-product', ['only'=>['update']]);
     }

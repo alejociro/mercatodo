@@ -13,7 +13,9 @@ use Illuminate\Queue\SerializesModels;
 
 class ActionAdmin
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public User $user;
     public string $action;
@@ -23,5 +25,4 @@ class ActionAdmin
         $this->user = $user;
         $this->action = $action;
     }
-
 }

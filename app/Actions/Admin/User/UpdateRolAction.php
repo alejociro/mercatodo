@@ -8,7 +8,7 @@ use Spatie\Permission\Models\Role;
 
 class UpdateRolAction
 {
-    public function execute(Role $role, $name, $permissions):void
+    public function execute(Role $role, $name, $permissions): void
     {
         $role->name = $name;
         $role->save();

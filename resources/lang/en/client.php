@@ -1,4 +1,5 @@
 <?php
+
 return [
   'welcome' => [
         'fields' => [
@@ -112,4 +113,3 @@ return [
         ]
     ],
 ];
-

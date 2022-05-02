@@ -34,5 +34,4 @@ class ShoppingCart extends Model
     {
         return MoneyFormatHelper::convert($this->total);
     }
-
 }

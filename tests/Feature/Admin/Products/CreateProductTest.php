@@ -40,5 +40,4 @@ class CreateProductTest extends TestCase
         $response->assertSee(trans('admin.products.fields.cancel'));
         $response->assertSee(trans('admin.products.fields.save'));
     }
-
 }

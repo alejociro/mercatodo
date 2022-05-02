@@ -11,12 +11,12 @@ class UpdateItemInCartAction
     {
         $shoppingCartItem= auth()->user()->shoppingCartUser()->shoppingCartItems;
         $totalQuantity = $data['quantity'];
-        foreach ($shoppingCartItem as $item){
-            if ($item->product_id == $product->id){
+        foreach ($shoppingCartItem as $item) {
+            if ($item->product_id == $product->id) {
                 $itemSelected = $item;
-                if ($totalQuantity > $product->stock){
+                if ($totalQuantity > $product->stock) {
                     return redirect()->route('shoppingCartUser');
-                }else{
+                } else {
                     $data=(['quantity'=>$totalQuantity]);
                     $itemSelected->update($data);
                     return redirect()->route('shoppingCartUser');

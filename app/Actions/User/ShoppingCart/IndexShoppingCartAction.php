@@ -10,7 +10,7 @@ class IndexShoppingCartAction
     {
         $shoppingCart = auth()->user()->shoppingCartUser();
         $totalPrice = 0;
-        foreach ($shoppingCart->shoppingCartItems as $product){
+        foreach ($shoppingCart->shoppingCartItems as $product) {
             $priceProduct = $product->product->price;
             $productQuantity = $product->quantity;
             $totalPrice += $priceProduct * $productQuantity;

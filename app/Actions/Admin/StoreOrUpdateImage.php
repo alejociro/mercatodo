@@ -8,12 +8,12 @@ class StoreOrUpdateImage
 {
     public function updateImage($image, Product $prod): Product
     {
-        if($imagen = $image){
+        if ($imagen = $image) {
             $rutaGuardarImg = 'image/';
             $imagenProducto = date('YmdHis') . "." . $imagen->getClientOriginalExtension();
             $imagen->move($rutaGuardarImg, $imagenProducto);
             $prod['image'] = "$imagenProducto";
-        }else{
+        } else {
             unset($prod['image']);
         }
 

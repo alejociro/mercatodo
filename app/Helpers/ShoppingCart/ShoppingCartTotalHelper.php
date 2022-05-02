@@ -6,7 +6,7 @@ use App\Models\ShoppingCart;
 
 class ShoppingCartTotalHelper
 {
-    public Static function totalOfCart(ShoppingCart $shoppingCart): int
+    public static function totalOfCart(ShoppingCart $shoppingCart): int
     {
         $totalPrice = 0;
         foreach ($shoppingCart->shoppingCartItems as $product) {

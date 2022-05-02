@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class ChangeUserStatusController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:create-user|edit-user|delete-user', ['only'=>['update']]);
     }

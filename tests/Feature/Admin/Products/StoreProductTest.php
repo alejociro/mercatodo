@@ -9,7 +9,6 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
 
-
 class StoreProductTest extends TestCase
 {
     use RefreshDatabase;
@@ -33,5 +32,4 @@ class StoreProductTest extends TestCase
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
     }
-
 }

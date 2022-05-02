@@ -2,8 +2,6 @@
 
 namespace App\Listeners;
 
-
-
 use App\Events\ProductSoldEvent;
 use App\Models\ProductSold;
 use Illuminate\Contracts\Queue\ShouldQueue;

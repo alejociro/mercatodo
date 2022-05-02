@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ReportPaymentsController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:see-user', ['only'=>['show']]);
     }

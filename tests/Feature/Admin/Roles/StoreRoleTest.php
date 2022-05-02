@@ -27,7 +27,6 @@ class StoreRoleTest extends TestCase
         $user = User::factory()->create()->givePermissionTo('create-rol');
         $response = $this->actingAs($user)->post(route('roles.store'), $data);
         $response->assertRedirect();
-        $this->assertDatabaseHas('roles', Arr::only($data,['name']));
+        $this->assertDatabaseHas('roles', Arr::only($data, ['name']));
     }
-
 }

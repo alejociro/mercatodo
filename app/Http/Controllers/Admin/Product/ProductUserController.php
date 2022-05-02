@@ -18,6 +18,6 @@ class ProductUserController extends Controller
                     ->whereNull('disabled_at')->paginate(6)->withQueryString();
         $currency = config('app.currency');
 
-        return view('products.user', compact('products','currency','shoppingCart'));
+        return view('products.user', compact('products', 'currency', 'shoppingCart'));
     }
 }

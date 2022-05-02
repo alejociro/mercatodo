@@ -15,13 +15,14 @@ class UpdateUserAction
         $user->surname = $data['surname'];
         $user->email = $data['email'];
         $user->document = $data['document'];
-        $user->phone = $data['phone'];;
-        if(!empty($data['password'])){
+        $user->phone = $data['phone'];
+        ;
+        if (!empty($data['password'])) {
             $data['password'] = Hash::make($data['password']);
-        }else{
+        } else {
             $data = Arr::except($data, array('password'));
         }
-        DB::table('model_has_roles')->where('model_id',$user->id)->delete();
+        DB::table('model_has_roles')->where('model_id', $user->id)->delete();
         $user->save();
     }
 }

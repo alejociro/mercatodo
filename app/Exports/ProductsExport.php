@@ -13,9 +13,9 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ProductsExport implements WithHeadings, FromQuery, ShouldQueue
 {
-    private ? array $stock;
-    private ? array $prices;
-    private ? string $category;
+    private ?array $stock;
+    private ?array $prices;
+    private ?string $category;
 
     public function forStock($array)
     {
@@ -53,9 +53,13 @@ class ProductsExport implements WithHeadings, FromQuery, ShouldQueue
     public function query()
     {
         return Product::query()->when($this->prices, function ($query) {
-            $query->WhereBetween('price', [$this->prices['initial'], $this->prices['end']]);})->when($this->stock['end'], function ($query) {
-            $query->WhereBetween('stock', [$this->stock['initial'], $this->stock['end']]);})
-            ->when($this->category, function ($query){ $query->where('category_id', $this->category);})->
-            select('name','price','stock','description','category_id','disabled_at');
+            $query->WhereBetween('price', [$this->prices['initial'], $this->prices['end']]);
+        })->when($this->stock['end'], function ($query) {
+            $query->WhereBetween('stock', [$this->stock['initial'], $this->stock['end']]);
+        })
+            ->when($this->category, function ($query) {
+                $query->where('category_id', $this->category);
+            })->
+            select('name', 'price', 'stock', 'description', 'category_id', 'disabled_at');
     }
 }

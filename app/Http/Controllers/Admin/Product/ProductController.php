@@ -19,19 +19,19 @@ use Illuminate\View\View;
 
 class ProductController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:see-product|create-product|edit-product|delete-product', ['only' => ['index','show']]);
         $this->middleware('permission:create-product', ['only'=>['create','store']]);
         $this->middleware('permission:edit-product', ['only'=>['edit','update']]);
-        $this->middleware('permission:delete-product',['only'=>['destroy']]);
+        $this->middleware('permission:delete-product', ['only'=>['destroy']]);
     }
 
     public function index(Request $request): View
     {
         $products = FilterProduct::filter($request->input('query'))->select(['id','name','price','stock','category_id','disabled_at'])->paginate(5)->withQueryString();
         $currency = config('app.currency');
-        return view('admin.products.index', compact('products','currency'));
+        return view('admin.products.index', compact('products', 'currency'));
     }
 
     public function create(): View
@@ -42,14 +42,14 @@ class ProductController extends Controller
 
     public function store(StoreProductRequest $request, StoreProductAction $storeProductAction, StoreFormatImage $formatImage): RedirectResponse
     {
-        $storeProductAction->execute($request->validated(),new Product(), $formatImage->saveImage($request->file('image')),$request['category_id']);
+        $storeProductAction->execute($request->validated(), new Product(), $formatImage->saveImage($request->file('image')), $request['category_id']);
         return redirect()->route('admin.products.index');
     }
 
     public function show(Product $product): View
     {
         $currency = config('app.currency');
-        return view('admin.products.show', compact('product','currency'));
+        return view('admin.products.show', compact('product', 'currency'));
     }
 
     public function edit(Product $product): View
@@ -61,7 +61,7 @@ class ProductController extends Controller
     public function update(UpdateProductRequest $request, Product $product, UpdateProductAction $updateProductAction, StoreOrUpdateImage $updateImage): RedirectResponse
     {
         $updateImage->updateImage($request->file('image'), $product);
-        $updateProductAction->execute($request->validated(), $product,$request['category_id']);
+        $updateProductAction->execute($request->validated(), $product, $request['category_id']);
         return redirect()->route('admin.products.index');
     }
 

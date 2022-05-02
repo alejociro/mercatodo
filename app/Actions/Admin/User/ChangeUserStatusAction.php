@@ -9,9 +9,9 @@ class ChangeUserStatusAction
 {
     public function execute(User $user)
     {
-        if($user->disabled_at == null){
+        if ($user->disabled_at == null) {
             $user->disabled_at = Carbon::now();
-        }else{
+        } else {
             $user->disabled_at = null;
         }
         $user->save();

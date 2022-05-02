@@ -15,7 +15,10 @@ use Illuminate\Support\Facades\Log;
 
 class NotifyUserOfCompletedExport implements ShouldQueue
 {
-    use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
+    use Dispatchable;
+    use InteractsWithQueue;
+    use Queueable;
+    use SerializesModels;
 
     protected User $user;
     protected string $filePath;
@@ -27,7 +30,7 @@ class NotifyUserOfCompletedExport implements ShouldQueue
      * @return void
      */
 
-    public function __construct($user,$filePath)
+    public function __construct($user, $filePath)
     {
         $this->user = $user;
         $this->filePath = $filePath;

@@ -6,7 +6,7 @@ use App\Models\Product;
 
 class UpdateProductAction
 {
-    public function execute(array $data,Product $product, $id): Product
+    public function execute(array $data, Product $product, $id): Product
     {
         $product->name = $data['name'];
         $product->price = $data['price'];

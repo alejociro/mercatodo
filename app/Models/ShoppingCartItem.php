@@ -22,7 +22,7 @@ class ShoppingCartItem extends Model
         return $this->belongsTo(Product::class);
     }
 
-     protected $appends = [
+    protected $appends = [
         'total_format'
     ];
 
@@ -30,5 +30,4 @@ class ShoppingCartItem extends Model
     {
         return MoneyFormatHelper::convert($this->total);
     }
-
 }

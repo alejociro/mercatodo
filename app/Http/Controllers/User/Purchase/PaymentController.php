@@ -23,14 +23,13 @@ class PaymentController extends Controller
         $shoppingCart = auth()->user()->shoppingCartUser();
         $payment = $paymentGatewayContract->createSession($shoppingCart, $request);
 
-        return $payment->status=='pending' ? redirect($payment->process_url): redirect()->route('products.index');
+        return $payment->status=='pending' ? redirect($payment->process_url) : redirect()->route('products.index');
     }
 
     public function show(Payment $payment): View
     {
         $currency = config('app.currency');
         $shoppingCart = ShoppingCart::find($payment->shopping_cart_id);
-        return view('client.payment.show',compact('payment', 'shoppingCart','currency'));
+        return view('client.payment.show', compact('payment', 'shoppingCart', 'currency'));
     }
-
 }

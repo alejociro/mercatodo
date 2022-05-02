@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class PaymentAdminController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:see-user|create-user|edit-user|delete-user', ['only'=>['index']]);
     }

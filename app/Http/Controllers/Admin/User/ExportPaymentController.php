@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ExportPaymentController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:create-user|edit-user|delete-user', ['only'=>['paymentFormExport','export']]);
     }
@@ -26,7 +26,7 @@ class ExportPaymentController extends Controller
     public function export(Request $request)
     {
         ActionAdmin::dispatch(auth()->user(), 'Exporte de pagos');
-        return Excel::download((new PaymentsExport)
+        return Excel::download((new PaymentsExport())
             ->forStatus($request->query('status'))->forDates($request->query('dates')), 'payments.xlsx');
     }
 }

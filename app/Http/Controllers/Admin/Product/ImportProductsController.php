@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class ImportProductsController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:create-product|edit-product|delete-product', ['only'=>['productFormImport','import']]);
     }

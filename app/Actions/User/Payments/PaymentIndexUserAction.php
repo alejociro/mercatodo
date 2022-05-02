@@ -11,13 +11,11 @@ class PaymentIndexUserAction
     {
         $userNow = auth()->user()->id;
         $payments = Payment::where('user_id', $userNow)->paginate(10);
-        foreach ($payments as $payment)
-            {
-                if($payment->status == 'pending')
-                {
-                    $paymentGatewayContract->queryPayment($payment);
-                }
+        foreach ($payments as $payment) {
+            if ($payment->status == 'pending') {
+                $paymentGatewayContract->queryPayment($payment);
             }
+        }
         return $payments;
     }
 }

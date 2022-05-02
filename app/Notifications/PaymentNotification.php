@@ -38,9 +38,9 @@ class PaymentNotification extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
                     ->line('An payment was created with reference' . $this->payment->reference . '.')
-                    ->action('View details', route('payments.show',$this->payment))
+                    ->action('View details', route('payments.show', $this->payment))
                     ->line('Thanks for your purchase!');
     }
 

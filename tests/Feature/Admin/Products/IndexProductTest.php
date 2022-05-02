@@ -32,6 +32,3 @@ class IndexProductTest extends TestCase
         $response->assertForbidden();
     }
 }
-
-
-

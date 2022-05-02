@@ -17,13 +17,13 @@ class ShoppingCartItemController extends Controller
 {
     public function store(Request $request, ShoppingCart $shoppingCart, Product $product, StoreItemInCartAction $storeItemInCartAction): RedirectResponse
     {
-        return $storeItemInCartAction->execute($request->all(), $shoppingCart,$product);
+        return $storeItemInCartAction->execute($request->all(), $shoppingCart, $product);
     }
 
     public function show(Product $product): View
     {
         $currency = config('app.currency');
-        return view('admin.products.show', compact('product','currency'));
+        return view('admin.products.show', compact('product', 'currency'));
     }
 
     public function update(Request $request, Product $product, UpdateItemInCartAction $updateItemInCartAction): RedirectResponse
@@ -37,4 +37,3 @@ class ShoppingCartItemController extends Controller
         return redirect()->route('shoppingCartUser');
     }
 }
-

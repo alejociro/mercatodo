@@ -42,7 +42,7 @@ class ExportProductReady extends Notification
      */
     public function toMail($notifiable)
     {
-        return (new MailMessage)
+        return (new MailMessage())
                     ->line('Aqui tienes el link para descargar el archivo.')
                     ->action('Descargar', $this->filePath)
                     ->line('Mercatodo!!');

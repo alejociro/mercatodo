@@ -14,7 +14,10 @@ use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable, HasRoles;
+    use HasApiTokens;
+    use HasFactory;
+    use Notifiable;
+    use HasRoles;
 
     protected $fillable = [
         'name',
@@ -34,12 +37,12 @@ class User extends Authenticatable implements MustVerifyEmail
         'email_verified_at' => 'datetime',
     ];
 
-    public function shoppingCarts():HasMany
+    public function shoppingCarts(): HasMany
     {
         return $this->hasMany(ShoppingCart::class);
     }
 
-    public function shoppingCartUser():ShoppingCart
+    public function shoppingCartUser(): ShoppingCart
     {
         return $this->shoppingCarts()->latest()->first() ?? $this->shoppingCarts()->create();
     }
@@ -49,7 +52,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->shoppingCarts()->create();
     }
 
-    public function payments():HasMany
+    public function payments(): HasMany
     {
         return $this->hasMany(Payment::class);
     }
@@ -58,5 +61,4 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->hasMany(Action::class);
     }
-
 }

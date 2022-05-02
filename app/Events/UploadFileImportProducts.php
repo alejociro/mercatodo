@@ -13,7 +13,9 @@ use Illuminate\Queue\SerializesModels;
 
 class UploadFileImportProducts
 {
-    use Dispatchable, InteractsWithSockets, SerializesModels;
+    use Dispatchable;
+    use InteractsWithSockets;
+    use SerializesModels;
 
     public User $user;
     public string $message;

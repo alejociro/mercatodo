@@ -25,7 +25,7 @@ class StoreUserTest extends TestCase
         $user = User::factory()->create()->givePermissionTo('create-user');
         $response = $this->actingAs($user)->post(route('users.store'), $data);
         $response->assertRedirect();
-        $this->assertDatabaseHas('users', Arr::only($data,['name','email']));
+        $this->assertDatabaseHas('users', Arr::only($data, ['name','email']));
     }
 
     private function userData(): array
@@ -67,5 +67,4 @@ class StoreUserTest extends TestCase
 //            ]
 //        ];
 //    }
-
 }

@@ -9,9 +9,9 @@ class ChangeProductStatusAction
 {
     public function execute(Product $product)
     {
-        if($product->disabled_at == null){
+        if ($product->disabled_at == null) {
             $product->disabled_at = Carbon::now();
-        }else{
+        } else {
             $product->disabled_at = null;
         }
         $product->save();

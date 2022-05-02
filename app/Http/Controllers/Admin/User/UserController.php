@@ -15,12 +15,12 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:see-user|create-user|edit-user|delete-user', ['only' => ['index']]);
         $this->middleware('permission:create-user', ['only'=>['create','store']]);
         $this->middleware('permission:edit-user', ['only'=>['edit','update']]);
-        $this->middleware('permission:delete-user',['only'=>['destroy']]);
+        $this->middleware('permission:delete-user', ['only'=>['destroy']]);
     }
 
     public function index(): View
@@ -44,8 +44,8 @@ class UserController extends Controller
     public function edit(User $user): View
     {
         $roles = Role::all();
-        $userRole = $user->roles->pluck('name','name')->all();
-        return view('admin.users.edit', compact('user','roles','userRole'));
+        $userRole = $user->roles->pluck('name', 'name')->all();
+        return view('admin.users.edit', compact('user', 'roles', 'userRole'));
     }
 
     public function update(UpdateUserRequest $request, User $user, UpdateUserAction $updateUserAction): RedirectResponse
@@ -58,7 +58,6 @@ class UserController extends Controller
     public function destroy(User $user, DeleteModelAction $deleteModelAction): RedirectResponse
     {
         $deleteModelAction->execute($user);
-        return redirect()->route('admin.users.index' );
+        return redirect()->route('admin.users.index');
     }
 }
-

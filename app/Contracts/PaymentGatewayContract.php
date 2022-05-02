@@ -11,5 +11,5 @@ interface PaymentGatewayContract
 {
     public function connection(array $settings): self;
     public function createSession(ShoppingCart $shoppingCart, Request $request): Payment;
-    public function queryPayment(Payment $payment):Payment;
+    public function queryPayment(Payment $payment): Payment;
 }

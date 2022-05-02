@@ -15,7 +15,6 @@ class TryPaymentController extends Controller
         $shoppingCart= ShoppingCart::find($payment->shopping_cart_id);
         $payment = $paymentGatewayContract->createSession($shoppingCart, $request);
 
-        return $payment->status=='pending' ? redirect($payment->process_url): redirect()->route('products.index');
+        return $payment->status=='pending' ? redirect($payment->process_url) : redirect()->route('products.index');
     }
-
 }

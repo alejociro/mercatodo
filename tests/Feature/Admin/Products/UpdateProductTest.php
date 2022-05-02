@@ -35,7 +35,6 @@ class UpdateProductTest extends TestCase
 
         $product = $product->refresh();
         $this->assertEquals($request['name'], $product->name);
-
     }
 
     public function test_it_can_update_a_product_without_image(): void
@@ -53,6 +52,5 @@ class UpdateProductTest extends TestCase
 
         $product = $product->refresh();
         $this->assertEquals($request['name'], $product->name);
-
     }
 }

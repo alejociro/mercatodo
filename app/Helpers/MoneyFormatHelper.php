@@ -6,6 +6,6 @@ class MoneyFormatHelper
 {
     public static function convert(?string $amount): string
     {
-        return '$' . ($amount ? number_format($amount,0, ',', '.'): '0');
+        return '$' . ($amount ? number_format($amount, 0, ',', '.') : '0');
     }
 }

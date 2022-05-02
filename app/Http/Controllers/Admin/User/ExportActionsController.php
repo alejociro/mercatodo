@@ -24,9 +24,9 @@ class ExportActionsController extends Controller
     {
         $user =auth()->user();
         $filepath = asset('storage/actions.xlsx');
-        Excel::store((new ActionsExport)
-            ->forUser($request->query('user_id')), 'actions.xlsx','public')
-            ->chain([new NotifyUserOfCompletedExport($user,$filepath)]);
+        Excel::store((new ActionsExport())
+            ->forUser($request->query('user_id')), 'actions.xlsx', 'public')
+            ->chain([new NotifyUserOfCompletedExport($user, $filepath)]);
 
         return view('admin.users.actions.export');
     }

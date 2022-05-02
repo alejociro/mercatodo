@@ -13,7 +13,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class ActionsExport implements FromQuery, WithHeadings, ShouldQueue
 {
-    private ? string $id;
+    private ?string $id;
 
     public function forUser(string $id = null)
     {
@@ -26,7 +26,7 @@ class ActionsExport implements FromQuery, WithHeadings, ShouldQueue
     {
         return Action::query()->when($this->id, function ($query) {
             $query->where('user_id', $this->id);
-        })->select('user_id','name','created_at');
+        })->select('user_id', 'name', 'created_at');
     }
 
     public function headings(): array

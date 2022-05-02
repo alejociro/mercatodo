@@ -20,5 +20,4 @@ class IndexCategoryTest extends TestCase
         $response->assertViewIs('admin.category.index');
         $response->assertViewHas('categories');
     }
-
 }

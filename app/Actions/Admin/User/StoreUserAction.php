@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 
 class StoreUserAction
 {
-    public function execute(array $data,User $user): User
+    public function execute(array $data, User $user): User
     {
         $user->name = $data['name'];
         $user->surname = $data['surname'];

@@ -17,10 +17,9 @@ class CheckUserStatus
      */
     public function handle(Request $request, Closure $next)
     {
-        if(auth()->user()->disabled_at == null)
-        {
+        if (auth()->user()->disabled_at == null) {
             return $next($request);
-        }else{
+        } else {
             Auth::guard('web')->logout();
 
             $request->session()->invalidate();
@@ -29,6 +28,5 @@ class CheckUserStatus
 
             return redirect('login')->with('Error', 'Su cuenta esta deshabilitada');
         }
-
     }
 }

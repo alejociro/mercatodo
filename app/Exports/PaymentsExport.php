@@ -32,7 +32,8 @@ class PaymentsExport implements WithHeadings, FromQuery
     public function query()
     {
         return Payment::query()->when($this->status, function ($query) {
-            $query->where('status', $this->status);})
+            $query->where('status', $this->status);
+        })
             ->WhereBetween('created_at', [$this->dates['initial'], $this->dates['end']])
             ->select('reference', 'payer_document', 'amount', 'status', 'paid_at', 'process_url', 'request_id');
     }

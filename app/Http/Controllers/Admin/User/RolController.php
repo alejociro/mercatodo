@@ -18,17 +18,17 @@ use Illuminate\Support\Facades\DB;
 
 class RolController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:see-rol|create-rol|edit-rol|delete-rol', ['only'=>['index']]);
         $this->middleware('permission:create-rol', ['only'=>['create','store']]);
         $this->middleware('permission:edit-rol', ['only'=>['edit','update']]);
-        $this->middleware('permission:delete-rol',['only'=>['destroy']]);
+        $this->middleware('permission:delete-rol', ['only'=>['destroy']]);
     }
 
     public function index(): View
     {
-        $roles = Cache::rememberForever('roles', function (){
+        $roles = Cache::rememberForever('roles', function () {
             return Role::paginate(5);
         });
 
@@ -53,9 +53,9 @@ class RolController extends Controller
         return view('admin.roles.edit', compact('arr'));
     }
 
-    public function update(UpdateRolRequest $request, Role $role,UpdateRolAction $updateRolAction): RedirectResponse
+    public function update(UpdateRolRequest $request, Role $role, UpdateRolAction $updateRolAction): RedirectResponse
     {
-        $updateRolAction->execute($role,$request->input('name'), $request->input('permission'));
+        $updateRolAction->execute($role, $request->input('name'), $request->input('permission'));
         return redirect()->route('admin.roles.index');
     }
 

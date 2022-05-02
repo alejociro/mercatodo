@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 class ReportProductController extends Controller
 {
-    function __construct()
+    public function __construct()
     {
         $this->middleware('permission:see-product', ['only'=>['reportProductSold']]);
     }
