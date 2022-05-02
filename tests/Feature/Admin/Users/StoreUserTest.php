@@ -23,9 +23,9 @@ class StoreUserTest extends TestCase
     {
         $data = $this->userData();
         $user = User::factory()->create()->givePermissionTo('create-user');
-        $response = $this->actingAs($user)->post(route('users.store'), $data);
+        $response = $this->actingAs($user)->post(route('admin.users.store'), $data);
         $response->assertRedirect();
-        $this->assertDatabaseHas('users', Arr::only($data,['name','email']));
+        $this->assertDatabaseHas('users', Arr::only($data, ['name','email']));
     }
 
     private function userData(): array
@@ -40,32 +40,4 @@ class StoreUserTest extends TestCase
             'confirm-password' => '12345678',
         ];
     }
-//
-//    /**
-//     * @param array $data
-//     * @param string $field
-//     * @return void
-//     * @dataProvider invalidDataProvider
-//     */
-//    public function test_it_validates_store_user_request(array $data, string $field)
-//    {
-//
-//        $response = $this->post('/users', $data);
-//
-//        $response->assertSessionHasErrors($field);
-//    }
-//
-//    public function invalid_Data_Provider(): array
-//    {
-//        return [
-//            'validate rule name required' => [
-//                'data' => array_replace(
-//                    $this->userData(),
-//                    ['name' => null]
-//                ),
-//                'field' => 'name'
-//            ]
-//        ];
-//    }
-
 }

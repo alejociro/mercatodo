@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 
 class PaymentAdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:see-user|create-user|edit-user|delete-user', ['only'=>['index']]);
+    }
+
     public function index()
     {
         $payments = Payment::paginate(20);

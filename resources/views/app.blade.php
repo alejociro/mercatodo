@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ToDo App</title>
+    <title>Mercatodo</title>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet" />
     <link rel="shortcut icon" href="icon.svg" type="svg/x-icon">
 </head>

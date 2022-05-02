@@ -19,14 +19,14 @@ class CreateRoleTest extends TestCase
     public function test_it_can_access_to_the_creation_users_route(): void
     {
         $user = User::factory()->create()->givePermissionTo('create-rol');
-        $response = $this->actingAs($user)->get(route('roles.create'));
+        $response = $this->actingAs($user)->get(route('admin.roles.create'));
         $response->assertStatus(200);
     }
 
     public function test_it_user_doesnt_permissions_cant_list_users(): void
     {
         $user2 = User::factory()->create();
-        $response = $this->actingAs($user2)->get(route('roles.create'));
+        $response = $this->actingAs($user2)->get(route('admin.roles.create'));
         $response->assertForbidden();
     }
 }

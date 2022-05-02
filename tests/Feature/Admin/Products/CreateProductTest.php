@@ -19,7 +19,7 @@ class CreateProductTest extends TestCase
     public function test_it_can_access_to_the_creation_route(): void
     {
         $user = User::factory()->create()->givePermissionTo('create-product');
-        $response = $this->actingAs($user)->get(route('products.create'));
+        $response = $this->actingAs($user)->get(route('admin.products.create'));
         $response->assertStatus(200);
     }
 
@@ -28,7 +28,7 @@ class CreateProductTest extends TestCase
         $user = User::factory()->create();
         $user->givePermissionTo('create-product');
 
-        $response = $this->actingAs($user)->get(route('products.create'));
+        $response = $this->actingAs($user)->get(route('admin.products.create'));
 
         $response->assertSee(trans('admin.products.titles.create a product'));
         $response->assertSee(trans('admin.products.fields.name'));
@@ -40,5 +40,4 @@ class CreateProductTest extends TestCase
         $response->assertSee(trans('admin.products.fields.cancel'));
         $response->assertSee(trans('admin.products.fields.save'));
     }
-
 }

@@ -25,7 +25,7 @@ class UpdateUserTest extends TestCase
         $user2 = User::factory()->create();
         $user = User::factory()->create()->givePermissionTo('edit-user');
 
-        $response = $this->actingAs($user)->patch(route('users.update', $user2->id), $request);
+        $response = $this->actingAs($user)->patch(route('admin.users.update', $user2->id), $request);
         $response->assertRedirect();
 
         $user2 = $user2->refresh();
@@ -42,7 +42,7 @@ class UpdateUserTest extends TestCase
         $user2 = User::factory()->create();
         $user = User::factory()->create()->givePermissionTo('edit-user');
 
-        $response = $this->actingAs($user)->patch(route('users.update', $user2->id), $request);
+        $response = $this->actingAs($user)->patch(route('admin.users.update', $user2->id), $request);
         $response->assertRedirect();
 
         $user2 = $user2->refresh();

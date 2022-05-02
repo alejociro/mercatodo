@@ -9,7 +9,6 @@ use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Arr;
 use Tests\TestCase;
 
-
 class StoreProductTest extends TestCase
 {
     use RefreshDatabase;
@@ -29,9 +28,8 @@ class StoreProductTest extends TestCase
             'image' => UploadedFile::fake()->image('product.jpg', 500, 250)->size(50),
         ];
         $user = User::factory()->create()->givePermissionTo('create-product');
-        $response = $this->actingAs($user)->post(route('products.store'), $data);
+        $response = $this->actingAs($user)->post(route('admin.products.store'), $data);
         $response->assertSessionHasNoErrors();
         $response->assertRedirect();
     }
-
 }

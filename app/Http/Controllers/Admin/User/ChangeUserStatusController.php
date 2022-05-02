@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\User;
 
+use App\Actions\Admin\User\ChangeUserStatusAction;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Carbon\Carbon;
@@ -10,15 +11,14 @@ use Illuminate\Http\Request;
 
 class ChangeUserStatusController extends Controller
 {
-    public function update($id): RedirectResponse
+    public function __construct()
     {
-        $user = User::find($id);
-        if($user->disabled_at == null){
-            $user->disabled_at = Carbon::now();
-        }else{
-            $user->disabled_at = null;
-        }
-        $user->save();
-        return redirect()->route('users.index');
+        $this->middleware('permission:create-user|edit-user|delete-user', ['only'=>['update']]);
+    }
+
+    public function update(User $user, ChangeUserStatusAction $changeUserStatusAction): RedirectResponse
+    {
+        $changeUserStatusAction->execute($user);
+        return redirect()->route('admin.users.index');
     }
 }

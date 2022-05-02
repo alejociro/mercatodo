@@ -4,15 +4,10 @@
     <meta charset="UTF-8"/>
     <title>Mercatodo</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Styles -->
     <link rel="stylesheet" href="{{ mix('css/app.css') }}">
-
-    <!-- Scripts -->
     <script src="{{ mix('js/app.js') }}" defer></script>
 </head>
-
 <body>
-
 <div>
     <header class="main-header clearfix">
         <nav>
@@ -22,27 +17,24 @@
                     <div class="hidden px-6 py-4 sm:block">
                         @auth
                             <a href="{{ url('/dashboard') }}"
-                               class="text-sm text-gray-700 dark:text-gray-500 underline">{{trans('Dashboard')}}</a>
+                               class="text-sm text-gray-700 dark:text-gray-500 underline">{{trans('client.welcome.fields.dashboard')}}</a>
                         @else
                             <a href="{{ route('login') }}"
-                               class="text-sm text-gray-700 dark:text-gray-500 underline">{{trans('Log in')}}</a>
+                               class="text-sm text-gray-700 dark:text-gray-500 underline">{{trans('client.welcome.fields.login')}}</a>
 
                             @if (Route::has('register'))
                                 <a href="{{ route('register') }}"
-                                   class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">{{trans('Register')}}</a>
+                                   class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">{{trans('client.welcome.fields.register')}}</a>
                             @endif
                         @endauth
                     </div>
                 @endif
                 <div>
                     <div class="container mx-auto px-6 sm:px-12 flex flex-col-reverse sm:flex-row relative">
-
                     </div>
                 </div>
             </div>
         </nav>
-
-
     </header>
     <body>
     <div x-data="{ cartOpen: false , isOpen: false }" class="bg-white">
@@ -61,7 +53,7 @@
                         <span class="mx-1 text-sm">Col</span>
                     </div>
                     <div class="w-full text-gray-700 md:text-center text-2xl font-semibold">
-                        MERCATODO
+                        {{trans('client.welcome.fields.mercatodo')}}
                     </div>
                     <div class="flex items-center justify-end w-full">
                         <button @click="cartOpen = !cartOpen" class="text-gray-600 focus:outline-none mx-4 sm:mx-0">
@@ -89,7 +81,7 @@
                     <div class="flex flex-col sm:flex-row">
                         <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">{{trans('Home')}}</a>
                         <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
-                           href="#">{{trans('Categories')}}</a>
+                           href="#">{{trans('client.welcome.fields.categories')}}</a>
                         <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">{{trans('About')}}</a>
                     </div>
                 </nav>
@@ -97,79 +89,17 @@
                 </div>
             </div>
         </header>
-
-{{--        <!-- Carrito -->--}}
-{{--        <div :class="cartOpen ? 'translate-x-0 ease-out' : 'translate-x-full ease-in'"--}}
-{{--             class="fixed right-0 top-0 max-w-xs w-full h-full px-6 py-4 transition duration-300 transform overflow-y-auto bg-white border-l-2 border-gray-300">--}}
-{{--            <div class="flex items-center justify-between">--}}
-{{--                <h3 class="text-2xl font-medium text-gray-700">Your cart</h3>--}}
-{{--                <button @click="cartOpen = !cartOpen" class="text-gray-600 focus:outline-none">--}}
-{{--                    <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"--}}
-{{--                         viewBox="0 0 24 24" stroke="currentColor">--}}
-{{--                        <path d="M6 18L18 6M6 6l12 12"></path>--}}
-{{--                    </svg>--}}
-{{--                </button>--}}
-{{--            </div>--}}
-{{--            <hr class="my-3">--}}
-{{--            <div class="flex justify-between mt-6">--}}
-{{--                <div class="flex">--}}
-{{--                    <img class="h-20 w-20 object-cover rounded"--}}
-{{--                         src="https://images.unsplash.com/photo-1593642632823-8f785ba67e45?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1189&q=80"--}}
-{{--                         alt="">--}}
-{{--                    <div class="mx-3">--}}
-{{--                        <h3 class="text-sm text-gray-600">Mac Book Pro</h3>--}}
-{{--                        <div class="flex items-center mt-2">--}}
-{{--                            <button class="text-gray-500 focus:outline-none focus:text-gray-600">--}}
-{{--                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"--}}
-{{--                                     stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">--}}
-{{--                                    <path d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>--}}
-{{--                                </svg>--}}
-{{--                            </button>--}}
-{{--                            <span class="text-gray-700 mx-2">2</span>--}}
-{{--                            <button class="text-gray-500 focus:outline-none focus:text-gray-600">--}}
-{{--                                <svg class="h-5 w-5" fill="none" stroke-linecap="round" stroke-linejoin="round"--}}
-{{--                                     stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">--}}
-{{--                                    <path d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>--}}
-{{--                                </svg>--}}
-{{--                            </button>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <span class="text-gray-600">20$</span>--}}
-{{--            </div>--}}
-
-{{--            <div class="mt-8">--}}
-{{--                <form class="flex items-center justify-center">--}}
-{{--                    <input class="form-input w-48" type="text" placeholder="Add promocode">--}}
-{{--                    <button--}}
-{{--                        class="ml-3 flex items-center px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">--}}
-{{--                        <span>Apply</span>--}}
-{{--                    </button>--}}
-{{--                </form>--}}
-{{--            </div>--}}
-{{--            <a class="flex items-center justify-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">--}}
-{{--                <span>Chechout</span>--}}
-{{--                <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"--}}
-{{--                     viewBox="0 0 24 24" stroke="currentColor">--}}
-{{--                    <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>--}}
-{{--                </svg>--}}
-{{--            </a>--}}
-{{--        </div>--}}
-{{--        <!-- final carrito-->--}}
-
         <main class="my-8">
             <div class="container mx-auto px-6">
                 <div class="h-64 rounded-md overflow-hidden bg-cover bg-center"
                      style="background-image: url('https://images.unsplash.com/photo-1577655197620-704858b270ac?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1280&q=144')">
                     <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
                         <div class="px-10 max-w-xl">
-                            <h2 class="text-2xl text-white font-semibold">MERCATODO</h2>
-                            <p class="mt-2 text-gray-400">El mejor lugar para realizar tus compras, registrate y empieza
-                                esta aventura
-                                de la mano de nosotros, Compras rapidas y seguras!!</p>
+                            <h2 class="text-2xl text-white font-semibold">{{trans('client.welcome.fields.mercatodo')}}</h2>
+                            <p class="mt-2 text-gray-400">{{trans('client.welcome.descriptions.one')}}</p>
                             <a href="{{ route('register') }}"
                                 class="flex items-center mt-4 px-3 py-2 bg-blue-600 text-white text-sm uppercase font-medium rounded hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
-                                <span>Registrate</span>
+                                <span>{{trans('client.welcome.fields.register')}}</span>
                                 <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                      stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                     <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -183,13 +113,11 @@
                          style="background-image: url('https://images.unsplash.com/photo-1547949003-9792a18a2601?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80')">
                         <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
                             <div class="px-10 max-w-xl">
-                                <h2 class="text-2xl text-white font-semibold">Cuero</h2>
-                                <p class="mt-2 text-gray-400">Tenemos variedad, no solo vendemos tecnología,
-                                    aca podras ver los mejores accesorios y ropa de cuero que puedas encontrar en el
-                                    mercado</p>
+                                <h2 class="text-2xl text-white font-semibold">{{trans('client.welcome.fields.leather')}}</h2>
+                                <p class="mt-2 text-gray-400">{{trans('client.welcome.descriptions.two')}}</p>
                                 <button
                                     class="flex items-center mt-4 text-white text-sm uppercase font-medium rounded hover:underline focus:outline-none">
-                                    <span>Ver ahora</span>
+                                    <span>{{trans('client.welcome.fields.see now')}}</span>
                                     <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                          stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                         <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -202,13 +130,11 @@
                          style="background-image: url('https://images.unsplash.com/photo-1486401899868-0e435ed85128?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80')">
                         <div class="bg-gray-900 bg-opacity-50 flex items-center h-full">
                             <div class="px-10 max-w-xl">
-                                <h2 class="text-2xl text-white font-semibold">Teconología</h2>
-                                <p class="mt-2 text-gray-400">Lo ultimo en tecnología lo veras en MERCATODO, no te
-                                    defraudaremos
-                                    con lo mejor y mas innovador en el mercado</p>
+                                <h2 class="text-2xl text-white font-semibold">{{trans('client.welcome.fields.technology')}}</h2>
+                                <p class="mt-2 text-gray-400">{{trans('client.welcome.descriptions.three')}}</p>
                                 <button
                                     class="flex items-center mt-4 text-white text-sm uppercase font-medium rounded hover:underline focus:outline-none">
-                                    <span>Shop Now</span>
+                                    <span>{{trans('client.welcome.fields.shop now')}}</span>
                                     <svg class="h-5 w-5 mx-2" fill="none" stroke-linecap="round" stroke-linejoin="round"
                                          stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                                         <path d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
@@ -219,7 +145,7 @@
                     </div>
                 </div>
                 <div class="mt-16">
-                    <h3 class="text-gray-600 text-2xl font-medium">Fashions</h3>
+                    <h3 class="text-gray-600 text-2xl font-medium">{{trans('client.welcome.fields.fashions')}}</h3>
                     <div class="grid gap-6 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-6">
                         <div class="w-full max-w-sm mx-auto rounded-md shadow-md overflow-hidden">
                             <div class="flex items-end justify-end h-56 w-full bg-cover"
@@ -234,7 +160,7 @@
                                 </button>
                             </div>
                             <div class="px-5 py-3">
-                                <h3 class="text-gray-700 uppercase">Chanel</h3>
+                                <h3 class="text-gray-700 uppercase">{{trans('client.welcome.fields.chanel')}}</h3>
                                 <span class="text-gray-500 mt-2">$12</span>
                             </div>
                         </div>
@@ -251,7 +177,7 @@
                                 </button>
                             </div>
                             <div class="px-5 py-3">
-                                <h3 class="text-gray-700 uppercase">Man Mix</h3>
+                                <h3 class="text-gray-700 uppercase">{{trans('client.welcome.fields.man mix')}}</h3>
                                 <span class="text-gray-500 mt-2">$12</span>
                             </div>
                         </div>
@@ -268,7 +194,7 @@
                                 </button>
                             </div>
                             <div class="px-5 py-3">
-                                <h3 class="text-gray-700 uppercase">Classic watch</h3>
+                                <h3 class="text-gray-700 uppercase">{{trans('client.welcome.fields.classic watch')}}</h3>
                                 <span class="text-gray-500 mt-2">$12</span>
                             </div>
                         </div>
@@ -285,7 +211,7 @@
                                 </button>
                             </div>
                             <div class="px-5 py-3">
-                                <h3 class="text-gray-700 uppercase">woman mix</h3>
+                                <h3 class="text-gray-700 uppercase">{{trans('client.welcome.fields.women mix')}}</h3>
                                 <span class="text-gray-500 mt-2">$12</span>
                             </div>
                         </div>
@@ -293,19 +219,13 @@
                 </div>
             </div>
         </main>
-
     </div>
-
-
     </body>
-
-
     <footer>
         <section class="bg-white mt-20">
             <div class="max-w-2xl px-6 text-center mx-auto">
-                <h2 class="text-3xl font-semibold text-gray-800">Hola!!, Yo soy Alejandro, Un gusto en conocerte.</h2>
-                <p class="text-gray-600 mt-4">Esta es mi proyecto para la emprempresa Evertec, espero que te guste todo
-                    lo que hice.</p>
+                <h2 class="text-3xl font-semibold text-gray-800">{{trans('client.welcome.descriptions.four')}}</h2>
+                <p class="text-gray-600 mt-4">{{trans('client.welcome.descriptions.five')}}</p>
 
                 <div class="flex items-end justify-center mt-16">
                     <svg width="189" height="188" viewBox="0 0 189 188" fill="none" xmlns="http://www.w3.org/2000/svg">

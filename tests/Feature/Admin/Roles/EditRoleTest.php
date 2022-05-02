@@ -26,7 +26,7 @@ class EditRoleTest extends TestCase
 
         $user = User::factory()->create()->givePermissionTo('edit-rol');
 
-        $response = $this->actingAs($user)->get("/roles/{$role->id}/edit");
+        $response = $this->actingAs($user)->get("/admin/roles/{$role->id}/edit");
         $response->assertStatus(200);
         $response->assertViewIs('admin.roles.edit');
         $response->assertViewHas('role');

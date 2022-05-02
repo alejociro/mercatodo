@@ -17,7 +17,7 @@ class DeleteCategoryTest extends TestCase
         Permission::create(['name' => 'delete-category']);
         $category = Category::factory()->create();
         $user = User::factory()->create()->givePermissionTo('delete-category');
-        $response = $this->actingAs($user)->delete("/categories/{$category->getRouteKey()}");
+        $response = $this->actingAs($user)->delete("/admin/categories/{$category->getRouteKey()}");
         $response->assertRedirect();
     }
 }

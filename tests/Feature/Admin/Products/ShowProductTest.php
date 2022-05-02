@@ -20,7 +20,7 @@ class ShowProductTest extends TestCase
     {
         $product = Product::factory()->create();
         $user = User::factory()->create()->givePermissionTo('edit-product');
-        $response = $this->actingAs($user)->get("/products/{$product->id}");
+        $response = $this->actingAs($user)->get("/admin/products/{$product->id}");
         $response->assertStatus(200);
         $response->assertViewIs('admin.products.show');
         $response->assertViewHas('product');

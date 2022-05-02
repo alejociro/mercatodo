@@ -14,7 +14,11 @@ class UpdateUserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['min:5', 'string', 'max:100'],
+            'name' => ['min:3', 'max:100'],
+            'surname' => ['min:3', 'max:100'],
+            'email' => ['email'],
+            'phone' => ['min:8', 'max:14'],
+            'document' => ['min:8', 'max:14'],
             'password' => ['same:confirm-password'],
         ];
     }

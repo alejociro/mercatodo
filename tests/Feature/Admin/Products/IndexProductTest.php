@@ -19,7 +19,7 @@ class IndexProductTest extends TestCase
     public function test_it_can_list_products(): void
     {
         $user = User::factory()->create()->givePermissionTo('see-product');
-        $response = $this->actingAs($user)->get(route('products.index'));
+        $response = $this->actingAs($user)->get(route('admin.products.index'));
         $response->assertStatus(200);
         $response->assertViewIs('admin.products.index');
         $response->assertViewHas('products');
@@ -28,10 +28,7 @@ class IndexProductTest extends TestCase
     public function test_it_user_doesnt_permissions_cant_list_products(): void
     {
         $user2 = User::factory()->create();
-        $response = $this->actingAs($user2)->get(route('products.index'));
+        $response = $this->actingAs($user2)->get(route('admin.products.index'));
         $response->assertForbidden();
     }
 }
-
-
-

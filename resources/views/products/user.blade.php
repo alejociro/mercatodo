@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ trans('Products') }}
+            {{ trans('client.products.titles.products') }}
         </h2>
     </x-slot>
 
@@ -22,17 +22,13 @@
                                               d="M5.79417 16.5183C2.19424 13.0909 2.05438 7.39409 5.48178 3.79417C8.90918 0.194243 14.6059 0.054383 18.2059 3.48178C21.8058 6.90918 21.9457 12.6059 18.5183 16.2059L12.3124 22.7241L5.79417 16.5183ZM17.0698 14.8268L12.243 19.8965L7.17324 15.0698C4.3733 12.404 4.26452 7.97318 6.93028 5.17324C9.59603 2.3733 14.0268 2.26452 16.8268 4.93028C19.6267 7.59603 19.7355 12.0268 17.0698 14.8268Z"
                                               fill="currentColor"/>
                                     </svg>
-                                    <span class="mx-1 text-sm">Col</span>
+                                    <span class="mx-1 text-sm">{{trans('client.products.fields.ubi')}}</span>
                                 </div>
                             </div>
                             <nav :class="isOpen ? '' : 'hidden'" class="sm:flex sm:justify-center sm:items-center mt-4">
                                 <div class="flex flex-col sm:flex-row">
-                                    <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">Home</a>
-                                    <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">Shop</a>
                                     <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0"
-                                       href="#">Categories</a>
-                                    <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">Contact</a>
-                                    <a class="mt-3 text-gray-600 hover:underline sm:mx-3 sm:mt-0" href="#">About</a>
+                                       href="#">{{trans('client.products.fields.categories')}}</a>
                                 </div>
                             </nav>
                             <div class="relative mt-6 max-w-lg mx-auto">
@@ -48,12 +44,10 @@
                                     <input type="text" class="form-control" name="query"
                                            value="{{ request()->input('queryUser') }}"
                                            class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline"
-                                           type="text" placeholder="Search">
+                                           type="text" placeholder="{{trans('client.products.fields.search description')}}">
                                     <button type="submit"
-                                            class="bg-gray-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-gray-600 mr-6">{{trans('Search')}}</button>
-
+                                            class="bg-gray-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-gray-600 mr-6">{{trans('client.products.fields.search')}}</button>
                                 </form>
-
                             </div>
                         </div>
 
@@ -78,12 +72,12 @@
                                                         @csrf
                                                         <button
                                                             class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                                                            {{trans('Add to cart')}}
+                                                            {{trans('client.products.fields.add')}}
                                                         </button>
                                                         <input width="" id="quantity" name="quantity" type="number"
                                                                min="1"
                                                                class="w-28 my-2 border-2 border-black-300 rounded "
-                                                               placeholder="quantity">
+                                                               placeholder="{{trans('client.products.fields.quantity')}}">
                                                     </form>
                                                 </div>
                                             </div>

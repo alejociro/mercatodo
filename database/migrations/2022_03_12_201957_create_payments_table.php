@@ -10,7 +10,7 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->string('reference',40)->unique();
+            $table->string('reference', 40)->unique();
             $table->string('receipt')->nullable();
             $table->string('payer_document')->nullable();
             $table->string('payer_ip')->nullable();
@@ -18,7 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->unsignedInteger('amount')->nullable();
             $table->string('status')->nullable();
             $table->timestamp('paid_at')->nullable();
-            $table->string('process_url',255)->nullable();
+            $table->string('process_url', 255)->nullable();
             $table->string('request_id', 255)->nullable();
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')

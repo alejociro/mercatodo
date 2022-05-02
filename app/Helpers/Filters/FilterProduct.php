@@ -6,9 +6,9 @@ use App\Models\Product;
 
 class FilterProduct
 {
-    Public Static function filter($search)
+    public static function filter($search)
     {
-        $products = Product::where('name','LIKE','%'. $search . '%')->orderby('name');
+        $products = Product::where('name', 'LIKE', '%'. $search . '%')->orderby('name');
         return $products;
     }
 }

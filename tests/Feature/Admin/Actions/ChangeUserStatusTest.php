@@ -21,7 +21,7 @@ class ChangeUserStatusTest extends TestCase
     {
         $user2 = User::factory()->create();
         $user = User::factory()->create()->givePermissionTo('edit-user');
-        $response = $this->actingAs($user)->put(route('changeUserStatus',$user2->id));
+        $response = $this->actingAs($user)->put(route('admin.change.user.status', $user2));
         $response->assertRedirect();
 
         $user2 = $user2->refresh();
@@ -32,10 +32,10 @@ class ChangeUserStatusTest extends TestCase
     {
         $user2 = User::factory()->create();
         $user = User::factory()->create()->givePermissionTo('edit-user');
-        $this->actingAs($user)->put(route('changeUserStatus',$user2->id));
+        $this->actingAs($user)->put(route('admin.change.user.status', $user2));
 
 
-        $response = $this->actingAs($user)->put(route('changeUserStatus',$user2->id));
+        $response = $this->actingAs($user)->put(route('admin.change.user.status', $user2->id));
         $response->assertRedirect();
 
         $user2 = $user2->refresh();

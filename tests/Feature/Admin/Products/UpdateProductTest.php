@@ -30,12 +30,11 @@ class UpdateProductTest extends TestCase
         $product = Product::factory()->create();
         $user = User::factory()->create()->givePermissionTo('edit-product');
 
-        $response = $this->actingAs($user)->patch(route('products.update', $product), $request);
+        $response = $this->actingAs($user)->patch(route('admin.products.update', $product), $request);
         $response->assertRedirect();
 
         $product = $product->refresh();
         $this->assertEquals($request['name'], $product->name);
-
     }
 
     public function test_it_can_update_a_product_without_image(): void
@@ -48,11 +47,10 @@ class UpdateProductTest extends TestCase
         $product = Product::factory()->create();
         $user = User::factory()->create()->givePermissionTo('edit-product');
 
-        $response = $this->actingAs($user)->patch(route('products.update', $product), $request);
+        $response = $this->actingAs($user)->patch(route('admin.products.update', $product), $request);
         $response->assertRedirect();
 
         $product = $product->refresh();
         $this->assertEquals($request['name'], $product->name);
-
     }
 }

@@ -12,12 +12,9 @@ class TryPaymentController extends Controller
 {
     public function store(Request $request, PaymentGatewayContract $paymentGatewayContract, Payment $payment)
     {
-        $idCart = $payment->shopping_cart_id;
-        $shoppingCart= ShoppingCart::find($idCart);
-
+        $shoppingCart= ShoppingCart::find($payment->shopping_cart_id);
         $payment = $paymentGatewayContract->createSession($shoppingCart, $request);
 
-        return $payment->status=='pending' ? redirect($payment->process_url): redirect()->route('products.index');
+        return $payment->status=='pending' ? redirect($payment->process_url) : redirect()->route('products.index');
     }
-
 }
