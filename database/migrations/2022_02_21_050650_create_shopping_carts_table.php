@@ -14,6 +14,7 @@ class CreateShoppingCartsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')
                 ->references('id')
+                ->onDelete('cascade')
                 ->on('users');
             $table->timestamps();
         });

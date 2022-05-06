@@ -39,6 +39,7 @@ return [
         'fields' => [
             'id' => 'Id',
             'name' => 'Nombre',
+            'super' => 'Jefe',
             'email' => 'Correo electronico',
             'password' => 'Contraseña',
             'confirm password' => 'Confirmar contraseña',
@@ -99,7 +100,9 @@ return [
             'delete' => 'Elminar rol',
             'permissions' => 'Permisos para el rol',
             'save' => 'Crear rol',
-            'actions' => 'Acciones'
+            'actions' => 'Acciones',
+            'edit' => 'Editar el rol',
+            'update' => 'Guardar'
         ],
         'titles' => [
             'index' => 'Tabla de roles',

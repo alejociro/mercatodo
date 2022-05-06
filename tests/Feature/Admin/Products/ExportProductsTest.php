@@ -24,15 +24,4 @@ class ExportProductsTest extends TestCase
         $response->assertOk();
         Excel::assertQueued('products.xlsx', 'public');
     }
-
-    public function test_it_can_download_payments_export()
-    {
-        Excel::fake();
-
-        Permission::create(['name' => 'see-product']);
-        $user = User::factory()->create()->givePermissionTo('see-product');
-        $this->actingAs($user)->get('/admin/export/products');
-
-        Excel::assertStored('products.xlsx', 'public');
-    }
 }

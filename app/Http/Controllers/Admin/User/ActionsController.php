@@ -9,6 +9,11 @@ use Illuminate\View\View;
 
 class ActionsController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:create-user|edit-user|delete-user', ['only'=>['update']]);
+    }
+
     public function index(): View
     {
         $actions = Action::orderby('created_at')->paginate(20);
