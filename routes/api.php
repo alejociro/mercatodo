@@ -9,6 +9,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::apiResource('productsapi', ProductsApiController::class);
+Route::apiResource('products', ProductsApiController::class);
 Route::get('productMetric', [MetricsController::class , 'chart']);
 Route::get('metricPayments', [MetricsController::class, 'barChart']);

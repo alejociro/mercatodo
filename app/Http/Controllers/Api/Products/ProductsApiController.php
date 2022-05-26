@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\Products;
 
 use App\Actions\Admin\Api\StoreProductAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Products\StoreProductRequest;
+use App\Http\Requests\Admin\Products\UpdateProductRequest;
 use App\Http\Resources\Api\ProductsResource;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
@@ -17,7 +19,7 @@ class ProductsApiController extends Controller
         return ProductsResource::collection(Product::paginate());
     }
 
-    public function store(Request $request, StoreProductAction $storeProductAction): JsonResponse
+    public function store(StoreProductRequest $request, StoreProductAction $storeProductAction): JsonResponse
     {
         $product = $storeProductAction->execute($request->all(), new Product());
         return ProductsResource::make($product)->response()->setStatusCode(201);
@@ -28,16 +30,15 @@ class ProductsApiController extends Controller
         return ProductsResource::make($product);
     }
 
-    public function update(Request $request, $id): ProductsResource
+    public function update(UpdateProductRequest $request, $id): ProductsResource
     {
         $product = Product::find($id);
         $product->update($request->all());
         return ProductsResource::make($product);
     }
 
-    public function destroy($id): JsonResponse
+    public function destroy(Product $product): JsonResponse
     {
-        $product = Product::find($id);
         $product->delete();
         return response()->json(['status' => '201', 'message' => 'se ha eliminado correctamente el producto que has elegido']);
     }
