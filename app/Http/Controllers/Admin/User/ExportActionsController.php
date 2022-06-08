@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\User;
 
+use App\Actions\Admin\User\ExportActionsAction;
 use App\Exports\ActionsExport;
 use App\Http\Controllers\Controller;
 use App\Jobs\NotifyUserActionsExportReady;
@@ -24,14 +25,9 @@ class ExportActionsController extends Controller
         return view('admin.users.actions.export');
     }
 
-    public function export(Request $request): View
+    public function export(Request $request, ExportActionsAction $exportActionsAction): View
     {
-        $userConsult = User::select('id')->where('document', $request->query('user_id'))->first();
-        $user =auth()->user();
-        $filepath = asset('storage/actions.xlsx');
-        Excel::store((new ActionsExport())
-            ->forUser($userConsult->id), 'actions.xlsx', 'public')
-            ->chain([new NotifyUserActionsExportReady($user, $filepath)]);
+        $exportActionsAction->execute($request->query('user_id'));
         $actions = Action::orderby('created_at')->paginate(20);
         return view('admin.users.actions.actions', compact('actions'));
     }

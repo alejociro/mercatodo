@@ -18,6 +18,7 @@ class CreateShoppingCartItemsTable extends Migration
             $table->unsignedBigInteger('shopping_cart_id');
             $table->foreign('shopping_cart_id')
                 ->references('id')
+                ->onDelete('cascade')
                 ->on('shopping_carts');
             $table->unsignedInteger('quantity');
             $table->unsignedInteger('total');

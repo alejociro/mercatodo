@@ -48,6 +48,9 @@
                                     <td>{{$user->name}}</td>
                                     <td>{{$user->email}}</td>
                                     <td>
+                                        @if($user->email == 'mercatodo@mercatodo.com')
+                                            {{trans('admin.users.fields.super')}}
+                                        @endif
                                         @if(!empty($user->getRoleNames()))
                                             @foreach($user->getRoleNames() as $rolName)
                                                 <h5>{{$rolName}}</h5>
@@ -78,7 +81,8 @@
                                                       method="POST" class="formDelete">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit">{{trans('admin.users.fields.delete')}}</button>
+                                                    <button
+                                                        type="submit">{{trans('admin.users.fields.delete')}}</button>
                                                 </form>
                                             </div>
                                         </div>
@@ -90,7 +94,8 @@
                                                       method="POST">
                                                     @csrf
                                                     @method('PUT')
-                                                    <button type="submit">{{trans('admin.users.fields.change status')}}</button>
+                                                    <button
+                                                        type="submit">{{trans('admin.users.fields.change status')}}</button>
                                                 </form>
                                             </div>
                                         </div>
