@@ -1,94 +1,124 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ trans('client.products.titles.products') }}
-        </h2>
-    </x-slot>
+    <div>
+        <div class="carousel bg-neutral-500">
+            <div class="carousel-item">
+                <img
+                    src="https://images.pexels.com/photos/245032/pexels-photo-245032.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    width="400" height="200" alt="">
+            </div>
+            <div class="carousel-item">
+                <img
+                    src="https://images.pexels.com/photos/994523/pexels-photo-994523.jpeg"
+                    width="400" height="200" alt="">
+            </div>
+            <div class="carousel-item">
+                <img
+                    src="https://images.pexels.com/photos/969462/pexels-photo-969462.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                    width="400" height="200" alt="">
+            </div>
+            <div class="carousel-item">
+                <img
+                    src="https://images.pexels.com/photos/93820/pexels-photo-93820.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"
+                    width="400" height="200" alt="">
+            </div>
+            <div class="carousel-item">
+                <img
+                    src="https://images.pexels.com/photos/1080721/pexels-photo-1080721.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    width="400" height="200" alt="">
+            </div>
+            <div class="carousel-item">
+                <img
+                    src="https://images.pexels.com/photos/1036856/pexels-photo-1036856.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                    width="400" height="200" alt="">
+            </div>
+        </div>
+    </div>
 
     <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 ">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg ">
-                <div class="p-2 bg-white border-b border-gray-200">
-                    <div class="bg-white rounded-lg shadow-sm text-center flex justify-center flex-col gap-5">
-                        <div class="container mx-auto px-6 py-3 ">
-                            <div class="flex items-center justify-between">
-                                <div class="hidden w-full text-gray-600 md:flex md:items-center">
-                                    <svg class="h-5 w-5" viewBox="0 0 24 24" fill="none"
-                                         xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                              d="M16.2721 10.2721C16.2721 12.4813 14.4813 14.2721 12.2721 14.2721C10.063 14.2721 8.27214 12.4813 8.27214 10.2721C8.27214 8.06298 10.063 6.27212 12.2721 6.27212C14.4813 6.27212 16.2721 8.06298 16.2721 10.2721ZM14.2721 10.2721C14.2721 11.3767 13.3767 12.2721 12.2721 12.2721C11.1676 12.2721 10.2721 11.3767 10.2721 10.2721C10.2721 9.16755 11.1676 8.27212 12.2721 8.27212C13.3767 8.27212 14.2721 9.16755 14.2721 10.2721Z"
-                                              fill="currentColor"/>
-                                        <path fill-rule="evenodd" clip-rule="evenodd"
-                                              d="M5.79417 16.5183C2.19424 13.0909 2.05438 7.39409 5.48178 3.79417C8.90918 0.194243 14.6059 0.054383 18.2059 3.48178C21.8058 6.90918 21.9457 12.6059 18.5183 16.2059L12.3124 22.7241L5.79417 16.5183ZM17.0698 14.8268L12.243 19.8965L7.17324 15.0698C4.3733 12.404 4.26452 7.97318 6.93028 5.17324C9.59603 2.3733 14.0268 2.26452 16.8268 4.93028C19.6267 7.59603 19.7355 12.0268 17.0698 14.8268Z"
-                                              fill="currentColor"/>
-                                    </svg>
-                                    <span class="mx-1 text-sm">{{trans('client.products.fields.ubi')}}</span>
-                                </div>
-                            </div>
-
+        <div class="w-full mx-auto sm:px-6 lg:px-8">
+            <div class="overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="p-2 border-b border-gray-200">
+                    <div class="rounded-lg shadow-sm text-center flex justify-center flex-col gap-5 bg-gray-50">
+                        <div class="container mx-auto px-6 py-3">
                             <div class="relative mt-6 max-w-lg mx-auto">
                                 <div>
                                     <form action="{{route('productos')}}" method="GET">
-                                        <div class="flex items-center">
+                                        <div class="flex items-center my-6">
                                             <div>
                                                 <span
                                                     class="text-danger">@error('queryUser'){{ $message }} @enderror</span>
-                                                <input type="text" class="form-control rounded-full m-2" name="query"
-                                                       value="{{ request()->input('queryUser') }}"
-                                                       class="w-full border rounded-md pl-10 pr-4 py-2 focus:border-blue-500 focus:outline-none focus:shadow-outline"
-                                                       type="text"
-                                                       placeholder="{{trans('client.products.fields.search description')}}">
+                                                <input name="query" type="text"
+                                                       placeholder="{{trans('client.products.fields.search description')}}"
+                                                       class="input input-bordered input-primary w-full max-w-xs"
+                                                       value="{{ request()->input('queryUser') }}"/>
                                             </div>
-                                            <div class="flex sm:flex-row">
-                                                <label class="self-center">{{trans('client.products.fields.categories')}}</label>
-                                                <select class="m-3 rounded-full p-3" id="category_id" name="category_id">
-                                                    <option value=''>Todas</option>
+                                            <div class="flex sm:flex-row mx-4 my-4">
+                                                <select class="select select-primary w-full mx-4" id="category_id"
+                                                        name="category_id">
+                                                    <option value=''>Categorias</option>
                                                     @foreach($categories as $category)
                                                         <option value="{{$category->id}}">{{$category->name}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
+                                             <button type="submit"
+                                                class="bg-gray-500 rounded-full font-bold text-white mx-4 px-4 py-3 transition duration-300 ease-in-out hover:bg-gray-600 mr-6">{{trans('client.products.fields.search')}}</button>
                                         </div>
-                                        <button type="submit"
-                                                class="bg-gray-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-gray-600 mr-6">{{trans('client.products.fields.search')}}</button>
-                                    </form>
+                                       </form>
                                 </div>
                             </div>
                         </div>
 
 
-                        <div class="bg-white py-5 px-10">
+                        <div class=" px-10 flex">
                             <div
-                                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-x-10 xl-grid-cols-4 gap-y-10 gap-x-6  ">
+                                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-14 ">
                                 @foreach ($products as $product)
-                                    <div
-                                        class="container mx-auto shadow-lg rounded-lg max-w-md hover:shadow-2xl transition duration-300  flex flex-row items-center bg-gray-100">
-                                        <div class="flex px-2">
-                                            <img src="/image/{{$product->image}}" width="50%" alt=""
-                                                 class="w-full rounded-t-lg bg-gray-100 ">
-                                        </div>
-                                        <div class="p-6">
-                                            <h1 class="md:text-1xl text-xl hover:text-indigo-600 transition duration-200  font-bold text-gray-900 ">{{$product->name}}</h1>
-                                            <p class="text-gray-700 my-2 hover-text-900 ">{{$product->PriceFormat}}{{$currency}}</p>
-                                            <div class="flex-grow">
-                                                <div class="flex-column">
-                                                    <form method="POST"
-                                                          action="{{ route('shoppingCarts.items.store',['shoppingCart'=>$shoppingCart, 'product'=>$product]) }}">
-                                                        @csrf
-                                                        <button
-                                                            class="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-2 px-4 border border-blue-500 hover:border-transparent rounded">
-                                                            {{trans('client.products.fields.add')}}
-                                                        </button>
-                                                        <input width="" id="quantity" name="quantity" type="number"
-                                                               min="1"
-                                                               class="w-28 my-2 border-2 border-black-300 rounded "
-                                                               placeholder="{{trans('client.products.fields.quantity')}}">
-                                                    </form>
-                                                </div>
+                                    {{--                                    <div class="card w-96 bg-base-100 shadow-xl">--}}
+                                    {{--                                        <figure class="px-10 pt-10">--}}
+                                    {{--                                            <img src="/image/{{$product->image}}" alt="Shoes"--}}
+                                    {{--                                                 class="rounded-xl" width="400" height="225"/>--}}
+                                    {{--                                        </figure>--}}
+                                    {{--                                        <div class="card-body items-center text-center">--}}
+                                    {{--                                            <h2 class="card-title">{{$product->name}}</h2>--}}
+                                    {{--                                            <p>{{$product->PriceFormat}}{{$currency}}</p>--}}
+                                    {{--                                            <div class="card-actions">--}}
+                                    {{--                                                <form method="POST"--}}
+                                    {{--                                                      action="{{ route('shoppingCarts.items.store',['shoppingCart'=>$shoppingCart, 'product'=>$product]) }}">--}}
+                                    {{--                                                    @csrf--}}
+                                    {{--                                                    <input width="" id="quantity" name="quantity" type="number"--}}
+                                    {{--                                                           min="1"--}}
+                                    {{--                                                           class="w-28 my-2 border-2 border-black-300 rounded "--}}
+                                    {{--                                                           placeholder="{{trans('client.products.fields.quantity')}}">--}}
+                                    {{--                                                    <button class="btn btn-primary"--}}
+                                    {{--                                                            type="submit"> {{trans('client.products.fields.add')}}</button>--}}
+                                    {{--                                                </form>--}}
+                                    {{--                                            </div>--}}
+                                    {{--                                        </div>--}}
+                                    {{--                                    </div>--}}
+                                    <div class="card w-96 shadow-xl image-full mx-4 group bg-transparent">
+                                        <figure><img src="/image/{{$product->image}}" alt="Shoes"
+                                                     class="rounded-xl" width="400" height="225"/>
+                                        </figure>
+                                        <div class="card-body hidden group-hover:block  duration-100  hover-group:duration-300 group-hover:bg-gray-900 group-hover:bg-opacity-70">
+                                            <h2 class="card-title">{{$product->name}}</h2>
+                                            <p>{{$product->PriceFormat}}{{$currency}}</p>
+                                            <div class="card-actions justify-end  ">
+                                                <form method="POST"
+                                                      action="{{ route('shoppingCarts.items.store',['shoppingCart'=>$shoppingCart, 'product'=>$product]) }}">
+                                                    @csrf
+                                                    <button
+                                                        class="btn btn-primary my-4 ">{{trans('client.products.fields.add')}}</button>
+                                                    <input id="quantity" name="quantity" type="number"
+                                                           min="1"
+                                                           placeholder="{{trans('client.products.fields.quantity')}}"
+                                                           class="input input-ghost w-full max-w-xs "/>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
                                 @endforeach
+
                             </div>
                         </div>
                         <div>
