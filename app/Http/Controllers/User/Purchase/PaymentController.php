@@ -24,7 +24,7 @@ class PaymentController extends Controller
         $shoppingCart = auth()->user()->shoppingCartUser();
         $payment = $paymentGatewayContract->createSession($shoppingCart, $request);
 
-        return $payment->status=='pending' ? redirect($payment->process_url) : redirect()->route('products.index');
+        return $payment->status=='pending' ? redirect($payment->process_url) : redirect()->route('payments.index');
     }
 
     public function show(Payment $payment): View

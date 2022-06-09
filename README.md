@@ -52,7 +52,7 @@ $ composer install
 $ cp .env.example .env
 ```
 
->Ahora debemos configurar la base de datos en phpMyAdmin y en las variables de entorno que se encuentran en el archivo .env generado anteriormente. En este archivo también debemos configurar las credenciales de Mailtrap para probar la funcionalidad de verificación dle email del usuario.
+>Ahora debemos configurar la base de datos en phpMyAdmin y en las variables de entorno que se encuentran en el archivo .env generado anteriormente. En este archivo también debemos configurar las credenciales de Mailtrap para probar la funcionalidad de verificación de email del usuario y poner los datos de la pasarela de pagos.
 
 4. Generar la llave de la aplicación:
 ```bash
@@ -83,6 +83,6 @@ Para crear el usuario administrador lo puedes registrar con el siguiente correo 
 
 ```bash
 User::factory()->create([
-    'email' => 'mercatodo@mercatodo.com',
+    'email' => 'administrador@mercatodo.com',
 ]);
     
