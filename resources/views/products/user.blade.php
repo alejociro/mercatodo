@@ -50,7 +50,7 @@
                                                 <input name="query" type="text"
                                                        placeholder="{{trans('client.products.fields.search description')}}"
                                                        class="input input-bordered input-primary w-full max-w-xs"
-                                                       value="{{ request()->input('queryUser') }}"/>
+                                                       value="{{ request()->input('queryUser') }}" />
                                             </div>
                                             <div class="flex sm:flex-row mx-4 my-4">
                                                 <select class="select select-primary w-full mx-4" id="category_id"
@@ -61,10 +61,10 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                             <button type="submit"
-                                                class="bg-gray-500 rounded-full font-bold text-white mx-4 px-4 py-3 transition duration-300 ease-in-out hover:bg-gray-600 mr-6">{{trans('client.products.fields.search')}}</button>
+                                            <button type="submit"
+                                                    class="bg-gray-500 rounded-full font-bold text-white mx-4 px-4 py-3 transition duration-300 ease-in-out hover:bg-gray-600 mr-6">{{trans('client.products.fields.search')}}</button>
                                         </div>
-                                       </form>
+                                    </form>
                                 </div>
                             </div>
                         </div>
@@ -75,10 +75,21 @@
                                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-14 ">
                                 @foreach ($products as $product)
                                     <div class="card w-96 shadow-xl image-full mx-4 group bg-transparent">
-                                        <figure><img src="/image/{{$product->image}}" alt="Shoes"
-                                                     class="rounded-xl" width="400" height="225"/>
-                                        </figure>
-                                        <div class="card-body hidden group-hover:block  duration-100  hover-group:duration-300 group-hover:bg-gray-900 group-hover:bg-opacity-70">
+                                        @if(!$product->image)
+                                            <figure><img
+                                                    src="https://images.pexels.com/photos/434346/pexels-photo-434346.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                                                    alt="Shoes"
+                                                    class="rounded-xl" width="400" height="225" />
+                                            </figure>
+                                        @else
+                                            <figure><img src="/image/{{$product->image}}" alt="Shoes"
+                                                         class="rounded-xl" width="400" height="225" />
+                                            </figure>
+                                        @endif
+
+
+                                        <div
+                                            class="card-body hidden group-hover:block  duration-100  hover-group:duration-300 group-hover:bg-gray-900 group-hover:bg-opacity-70">
                                             <h2 class="card-title">{{$product->name}}</h2>
                                             <p>{{$product->PriceFormat}}{{$currency}}</p>
                                             <div class="card-actions justify-end  ">
@@ -91,7 +102,7 @@
                                                            min="1"
                                                            required
                                                            placeholder="{{trans('client.products.fields.quantity')}}"
-                                                           class="input input-ghost w-full max-w-xs "/>
+                                                           class="input input-ghost w-full max-w-xs " />
                                                 </form>
                                             </div>
                                         </div>
