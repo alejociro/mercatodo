@@ -14,7 +14,7 @@ class PaymentIndexUserAction
         $userNow = auth()->user()->id;
         $payments = Payment::where('user_id', $userNow)->paginate(10);
         foreach ($payments as $payment) {
-            if ($payment->status == 'pending') {
+            if ($payment->status == 'pending' && $payment->request_id) {
                 $paymentGatewayContract->queryPayment($payment);
             }
         }

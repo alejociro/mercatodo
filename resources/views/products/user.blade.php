@@ -74,28 +74,6 @@
                             <div
                                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-10 gap-x-14 ">
                                 @foreach ($products as $product)
-                                    {{--                                    <div class="card w-96 bg-base-100 shadow-xl">--}}
-                                    {{--                                        <figure class="px-10 pt-10">--}}
-                                    {{--                                            <img src="/image/{{$product->image}}" alt="Shoes"--}}
-                                    {{--                                                 class="rounded-xl" width="400" height="225"/>--}}
-                                    {{--                                        </figure>--}}
-                                    {{--                                        <div class="card-body items-center text-center">--}}
-                                    {{--                                            <h2 class="card-title">{{$product->name}}</h2>--}}
-                                    {{--                                            <p>{{$product->PriceFormat}}{{$currency}}</p>--}}
-                                    {{--                                            <div class="card-actions">--}}
-                                    {{--                                                <form method="POST"--}}
-                                    {{--                                                      action="{{ route('shoppingCarts.items.store',['shoppingCart'=>$shoppingCart, 'product'=>$product]) }}">--}}
-                                    {{--                                                    @csrf--}}
-                                    {{--                                                    <input width="" id="quantity" name="quantity" type="number"--}}
-                                    {{--                                                           min="1"--}}
-                                    {{--                                                           class="w-28 my-2 border-2 border-black-300 rounded "--}}
-                                    {{--                                                           placeholder="{{trans('client.products.fields.quantity')}}">--}}
-                                    {{--                                                    <button class="btn btn-primary"--}}
-                                    {{--                                                            type="submit"> {{trans('client.products.fields.add')}}</button>--}}
-                                    {{--                                                </form>--}}
-                                    {{--                                            </div>--}}
-                                    {{--                                        </div>--}}
-                                    {{--                                    </div>--}}
                                     <div class="card w-96 shadow-xl image-full mx-4 group bg-transparent">
                                         <figure><img src="/image/{{$product->image}}" alt="Shoes"
                                                      class="rounded-xl" width="400" height="225"/>
@@ -111,6 +89,7 @@
                                                         class="btn btn-primary my-4 ">{{trans('client.products.fields.add')}}</button>
                                                     <input id="quantity" name="quantity" type="number"
                                                            min="1"
+                                                           required
                                                            placeholder="{{trans('client.products.fields.quantity')}}"
                                                            class="input input-ghost w-full max-w-xs "/>
                                                 </form>
