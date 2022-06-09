@@ -34,7 +34,7 @@ class StoreItemInCartAction
             ]);
             return redirect()->route('productos');
         } else {
-            return redirect()->route('productosr');
+            return redirect()->route('productos');
         }
     }
 }

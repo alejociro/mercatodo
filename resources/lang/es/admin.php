@@ -19,7 +19,7 @@ return [
             'search' => 'Busca aqui...',
             'import' => 'Importes',
             'value' => 'Precio',
-            'new' => 'Crear un nuevo producto',
+            'new' => '+ Crear',
             'delete' => 'Eliminar producto',
             'change status' => 'Cambiar estado',
             'actions' => 'Acciones',
@@ -85,7 +85,7 @@ return [
             'save' => 'Crear',
             'edit' => 'Editar',
             'delete' => 'Eliminar categoría',
-            'new' => 'Crear una nueva categoría'
+            'new' => 'Nueva categoría'
         ],
         'titles' => [
             'create' => 'Crear una categoría',

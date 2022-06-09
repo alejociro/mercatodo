@@ -1,55 +1,19 @@
 <x-app-layout>
-    <x-slot name="header">
-        <div class="flex">
-            <h2 class="font-semibold text-xl mx-8 text-gray-800 leading-tight">
-                {{ trans('admin.products.titles.title') }}
-            </h2>
-            <form action="{{route('admin.categories.index')}}" method="GET">
-                <div class='flex px-4 items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
-                    <button type="submit"
-                            class='w-auto bg-gradient-to-b from-slate-800 to-slate-400 rounded-lg shadow-xl font-medium text-white px-4 py-2'>
-                        {{trans('admin.products.fields.category')}}
-                    </button>
-                </div>
-            </form>
-            <form action="{{route('admin.export.products.form')}}" method="GET">
-                <div class='flex px-4 items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
-                    <button type="submit"
-                            class='w-auto bg-gradient-to-b from-teal-800 to-teal-400 rounded-lg shadow-xl font-medium text-white px-4 py-2'>
-                        {{{trans('admin.products.fields.export')}}}
-                    </button>
-                </div>
-            </form>
-            <form action="{{route('admin.import.products.form')}}" method="GET">
-                <div class='flex px-4 items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
-                    <button type="submit"
-                            class='w-auto bg-gradient-to-b from-blue-800 to-blue-400 rounded-lg shadow-xl font-medium text-white px-4 py-2'>
-                        {{trans('admin.products.fields.import')}}
-                    </button>
-                </div>
-            </form>
-            <form action="{{route('admin.report.products')}}" method="GET">
-                <div class='flex px-4 items-center justify-center  md:gap-8 gap-4 pt-5 pb-5'>
-                    <button type="submit"
-                            class='w-auto bg-gradient-to-b from-purple-800 to-purple-400 rounded-lg shadow-xl font-medium text-white px-4 py-2'>
-                        {{trans('admin.products.fields.top')}}
-                    </button>
-                </div>
-            </form>
-        </div>
+    <div class="flex justify-center">
+        <ul class="menu flex flex-row bg-base-100 rounded-box p-2 shadow-lg">
+            <li><a href="{{route('admin.categories.index')}}">{{trans('admin.products.fields.category')}}</a></li>
+            <li><a href="{{route('admin.report.products')}}">{{trans('admin.products.fields.top')}}</a></li>
+            <li><a href="{{route('admin.import.products.form')}}">{{trans('admin.products.fields.import')}}</a></li>
+            <li><a href="{{route('admin.export.products.form')}}">{{trans('admin.products.fields.export')}}</a></li>
+        </ul>
+    </div>
 
-    </x-slot>
-
-    <div class="py-12">
+    <div>
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
                     <div class="p-2">
-                        <div class="p-6 inline-flex">
-                            <div class="inline-flex  bg-white p-2 ">
-                                <a class="inline-flex bg-indigo-200 text-black rounded-full h-6 px-3 justify-center items-center"
-                                   href="{{ route('admin.products.create') }}">{{trans('admin.products.fields.new')}}</a>
-                            </div>
+                        <div class="flex p-6 justify-center">
                             <form action="{{route('admin.products.index')}}" method="GET">
                                 <div class="flex items-center">
                                     <div>
@@ -71,75 +35,83 @@
                                             @endforeach
                                         </select>
                                     </div>
+                                    <button type="submit"
+                                            class="bg-gray-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-gray-600 mr-6">{{trans('client.products.fields.search')}}</button>
+
                                 </div>
-                                <button type="submit"
-                                        class="bg-gray-500 rounded-full font-bold text-white px-4 py-3 transition duration-300 ease-in-out hover:bg-gray-600 mr-6">{{trans('client.products.fields.search')}}</button>
                             </form>
                         </div>
                         <div class="bg-white rounded-lg shadow-sm text-center flex flex-col">
-                            <h1 class="bg-teal-500">{{trans('admin.products.titles.title')}}</h1>
+                            <h1>{{trans('admin.products.titles.title')}}</h1>
 
 
-                            <table>
-                                <thead>
-                                <th>ID</th>
-                                <th>{{trans('admin.products.fields.name')}}</th>
-                                <th>{{trans('admin.products.fields.value')}}</th>
-                                <th>{{trans('admin.products.fields.stock')}}</th>
-                                <th>{{trans('admin.products.fields.category')}}</th>
-                                <th>{{trans('admin.products.fields.status')}}</th>
-                                <th>{{trans('admin.products.fields.actions')}}</th>
-                                </thead>
-                                <tbody>
-                                @foreach ($products as $product)
-                                    <tr>
-                                        <td>{{$product->id}}</td>
-                                        <td>{{$product->name}}</td>
-                                        <td>{{$product->price_format}}{{$currency}}</td>
-                                        <td>{{$product->stock}}</td>
-                                        <td>{{$product->category->name}}</td>
-                                        <td>
-                                            @if($product->disabled_at == null)
-                                                {{trans('Enabled')}}
-                                            @else
-                                                Desactivado desde: {{$product->disabled_at}}
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <div class="inline-flex p-2">
-                                                <a href="{{ route('admin.products.edit', $product->id) }}"
-                                                   class="inline-flex items-center bg-white leading-none text-green-600 rounded-full p-2 shadow text-teal text-sm">{{trans('admin.products.fields.edit')}}</a>
-                                                <div
-                                                    class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">
-                                                    <form action="{{ route('admin.products.destroy', $product) }}"
-                                                          method="POST" class="formEliminar">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button
-                                                            type="submit">{{trans('admin.products.fields.delete')}}</button>
-                                                    </form>
+                            <div class="overflow-x-auto w-full">
+                                <table class="table w-full">
+                                    <thead>
+                                    <th>ID</th>
+                                    <th>{{trans('admin.products.fields.name')}}</th>
+                                    <th>{{trans('admin.products.fields.value')}}</th>
+                                    <th>{{trans('admin.products.fields.stock')}}</th>
+                                    <th>{{trans('admin.products.fields.category')}}</th>
+                                    <th>{{trans('admin.products.fields.status')}}</th>
+                                    <th class='flex justify-between'>{{trans('admin.products.fields.actions')}}
+                                        <a class=" text-black rounded-full"
+                                           href="{{ route('admin.products.create') }}">{{trans('admin.products.fields.new')}}</a>
+                                    </th>
 
+                                    </thead>
+                                    <tbody>
+                                    @foreach ($products as $product)
+                                        <tr>
+                                            <td>{{$product->id}}</td>
+                                            <td>{{$product->name}}</td>
+                                            <td>{{$product->price_format}}{{$currency}}</td>
+                                            <td>{{$product->stock}}</td>
+                                            <td>{{$product->category->name}}</td>
+                                            <td>
+                                                @if($product->disabled_at == null)
+                                                    {{trans('Enabled')}}
+                                                @else
+                                                    Desactivado desde: {{$product->disabled_at}}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <div class="inline-flex p-2">
+                                                    <a href="{{ route('admin.products.edit', $product->id) }}"
+                                                       class="inline-flex items-center bg-white leading-none text-green-600 rounded-full p-2 shadow text-teal text-sm">{{trans('admin.products.fields.edit')}}</a>
+                                                    <div
+                                                        class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">
+                                                        <form action="{{ route('admin.products.destroy', $product) }}"
+                                                              method="POST" class="formEliminar">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button
+                                                                type="submit">{{trans('admin.products.fields.delete')}}</button>
+                                                        </form>
+
+                                                    </div>
+                                                    <div
+                                                        class="inline-flex items-center bg-white leading-none text-black-600 rounded-full p-2 shadow text-teal text-sm">
+                                                        <form
+                                                            action="{{ route('admin.change.product.status', $product) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('PUT')
+                                                            <button
+                                                                type="submit">{{trans('admin.products.fields.change status')}}</button>
+                                                        </form>
+                                                    </div>
+                                                    <a href="{{ route('admin.products.show', $product) }}"
+                                                       class="inline-flex items-center bg-white leading-none text-green-600 rounded-full p-2 shadow text-teal text-sm">
+                                                        {{trans('admin.products.fields.show')}}</a>
                                                 </div>
-                                                <div
-                                                    class="inline-flex items-center bg-white leading-none text-black-600 rounded-full p-2 shadow text-teal text-sm">
-                                                    <form action="{{ route('admin.change.product.status', $product) }}"
-                                                          method="POST">
-                                                        @csrf
-                                                        @method('PUT')
-                                                        <button
-                                                            type="submit">{{trans('admin.products.fields.change status')}}</button>
-                                                    </form>
-                                                </div>
-                                                <a href="{{ route('admin.products.show', $product) }}"
-                                                   class="inline-flex items-center bg-white leading-none text-green-600 rounded-full p-2 shadow text-teal text-sm">
-                                                    {{trans('admin.products.fields.show')}}</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
 
-                            </table>
+                                </table>
+                            </div>
                             <div>
                                 {!! $products->links() !!}
                             </div>
@@ -155,16 +127,16 @@
 
 
 <script>
-    (function () {
-        'use strict'
+    (function() {
+        'use strict';
         //debemos crear la clase formEliminar dentro del form del boton borrar
         //recordar que cada registro a eliminar esta contenido en un form
-        var forms = document.querySelectorAll('.formEliminar')
+        var forms = document.querySelectorAll('.formEliminar');
         Array.prototype.slice.call(forms)
-            .forEach(function (form) {
-                form.addEventListener('submit', function (event) {
-                    event.preventDefault()
-                    event.stopPropagation()
+            .forEach(function(form) {
+                form.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    event.stopPropagation();
                     Swal.fire({
                         title: '¿CONFIRMA LA ELIMINACIÓN DEL PRODUCTO?',
                         icon: 'info',
@@ -177,37 +149,10 @@
                             this.submit();
                             Swal.fire('¡ELIMINADO!', 'EL PRODUCTO HA SIDO ELIMINADO EXITOSAMENTE.', 'success');
                         }
-                    })
-                }, false)
-            })
-    })()
+                    });
+                }, false);
+            });
+    })();
 </script>
 
-{{--<x-app-layout>--}}
-{{--    <x-slot name="header">--}}
-{{--        <h2 class="font-semibold text-xl text-gray-800 leading-tight">--}}
-{{--            {{ trans('Products') }}--}}
-{{--        </h2>--}}
-{{--    </x-slot>--}}
 
-{{--    <div class="py-12">--}}
-{{--        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">--}}
-{{--            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">--}}
-{{--                <div class="p-6 bg-white border-b border-gray-200">--}}
-{{--                    <div class="p-2">--}}
-{{--                        <div class="inline-flex items-center bg-white leading-none text-purple-600 rounded-full p-2 shadow text-teal text-sm">--}}
-{{--                            <a type="button" href="{{ route('products.create') }}" class="inline-flex bg-indigo-200 text-black rounded-full h-6 px-3 justify-center items-center">{{trans('New')}}</a>--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-{{--                    <div class="bg-white rounded-lg shadow-sm p-2 text-center flex justify-center flex-col gap-5">--}}
-{{--                        <h1 class="bg-orange-400">{{trans('Table of products')}}</h1>--}}
-
-
-{{--                    </div>--}}
-
-{{--                </div>--}}
-
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</x-app-layout>--}}

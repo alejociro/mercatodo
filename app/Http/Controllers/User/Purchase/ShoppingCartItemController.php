@@ -6,6 +6,7 @@ use App\Actions\Admin\DeleteModelAction;
 use App\Actions\User\ShoppingCart\StoreItemInCartAction;
 use App\Actions\User\ShoppingCart\UpdateItemInCartAction;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\ShoppingCart\StoreItemShoppingCart;
 use App\Models\Product;
 use App\Models\ShoppingCart;
 use App\Models\ShoppingCartItem;
@@ -15,7 +16,7 @@ use Illuminate\View\View;
 
 class ShoppingCartItemController extends Controller
 {
-    public function store(Request $request, ShoppingCart $shoppingCart, Product $product, StoreItemInCartAction $storeItemInCartAction): RedirectResponse
+    public function store(StoreItemShoppingCart $request, ShoppingCart $shoppingCart, Product $product, StoreItemInCartAction $storeItemInCartAction): RedirectResponse
     {
         return $storeItemInCartAction->execute($request->all(), $shoppingCart, $product);
     }

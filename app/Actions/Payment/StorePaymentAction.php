@@ -17,7 +17,7 @@ class StorePaymentAction
         $payment->amount = $totalPrice;
         $payment->payer_document = auth()->user()->document;
         $payment->payer_ip = $ip;
-        $payment->description = 'klasjdkljasdkljaskldjasklsadjlkasdjasd asdqweg';
+        $payment->description = 'Compra mercatodo !!';
         $payment->save();
 
         return $payment;
